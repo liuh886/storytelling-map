@@ -1,0 +1,8 @@
+{
+  "runtime": "static",
+  "platformVersion": 15,
+  "entry": "index.html",
+  "name": "第一幕：赫图阿拉到萨尔浒",
+  "slug": "di-yi-mu-he-tu-a-la-dao-sa-er-hu",
+  "managedCronJobs": []
+}

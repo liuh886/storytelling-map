@@ -1,0 +1,1956 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>第一幕：赫图阿拉到萨尔浒</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --bg:#f3efe6; --bg2:#ece5d3; --panel:#faf7ee; --panel2:#f1ebda;
+        --ink:#2b2417; --ink2:#5c5340; --ink3:#8a7d63;
+        --line:#d8cdb2; --line2:#c4b48d;
+        --gold:#a5761a; --gold2:#c9962e; --red:#a33327; --teal:#2e5f5a;
+        --chip:#efe8d2;
+        --shadow:0 18px 40px rgba(74,58,20,.18);
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#14110b; --bg2:#1a160e; --panel:#201b11; --panel2:#262012;
+          --ink:#ece2c8; --ink2:#c3b894; --ink3:#978a6b;
+          --line:#3d3520; --line2:#57492a;
+          --gold:#d9a83f; --gold2:#eebd55; --red:#d96a55; --teal:#6fae9f;
+          --chip:#2a2312;
+          --shadow:0 18px 40px rgba(0,0,0,.5);
+        }
+      }
+      *{box-sizing:border-box}
+      html,body{margin:0;padding:0}
+      body{
+        background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+        color:var(--ink);
+        font-family:"Noto Sans SC",system-ui,sans-serif;
+        -webkit-font-smoothing:antialiased;
+      }
+      button{font-family:inherit;cursor:pointer;min-height:2.25rem}
+      .serif{font-family:"Noto Serif SC",serif}
+
+      /* ---------- header ---------- */
+      header.act-head{
+        max-width:1440px;margin:0 auto;padding:1.1rem 1.25rem .4rem;
+        display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem;
+      }
+      .act-no{
+        font-family:"Noto Serif SC",serif;font-weight:900;letter-spacing:.35em;
+        color:var(--gold);font-size:.85rem;border:1px solid var(--line2);
+        padding:.3rem .6rem .3rem .95rem;border-radius:2px;background:var(--chip);
+      }
+      h1.act-title{
+        font-family:"Noto Serif SC",serif;font-weight:900;
+        font-size:clamp(1.55rem,3.4vw,2.5rem);margin:0;line-height:1.15;letter-spacing:.02em;
+      }
+      .act-sub{color:var(--ink2);font-size:.92rem;margin:0}
+      .act-sub b{color:var(--ink)}
+
+      /* ---------- layout ---------- */
+      .layout{
+        max-width:1440px;margin:0 auto;padding:.6rem 1.25rem 1.25rem;
+        display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:1.1rem;align-items:start;
+      }
+      .stage-wrap{min-width:0}
+      .tl-seg{min-width:0}
+      .tl-years span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+      @media (max-width:1020px){ .layout{grid-template-columns:1fr} }
+
+      /* ---------- stage ---------- */
+      .stage-wrap{position:relative}
+      .stage{
+        position:relative;border-radius:10px;overflow:hidden;
+        background:#0e0c08;box-shadow:var(--shadow);
+        border:1px solid var(--line2);
+        aspect-ratio:16/10.4;
+      }
+      @media (max-width:640px){ .stage{aspect-ratio:4/3.4} }
+      .stage .sky{
+        position:absolute;inset:0;
+        background:linear-gradient(180deg,#241d10 0%,#171208 55%,#100d07 100%);
+      }
+      .persp{position:absolute;inset:0;perspective:1150px;perspective-origin:50% 38%}
+      .tilt{
+        position:absolute;inset:-4% -2%;
+        transform:rotateX(33deg);
+        transform-style:preserve-3d;
+      }
+      .cam{
+        position:absolute;inset:0;
+        transition:transform 1.6s cubic-bezier(.65,.02,.23,1);
+        will-change:transform;
+      }
+      .cam svg{width:100%;height:100%;display:block}
+      .stage .vignette{position:absolute;inset:0;pointer-events:none;
+        box-shadow:inset 0 0 90px rgba(0,0,0,.55), inset 0 -30px 60px rgba(0,0,0,.35);}
+      /* shot caption */
+      .shot-tag{
+        position:absolute;left:.8rem;top:.8rem;z-index:6;
+        display:flex;gap:.45rem;align-items:center;
+        background:rgba(16,12,5,.72);color:#f0e5c3;border:1px solid rgba(217,168,63,.45);
+        padding:.34rem .7rem;border-radius:3px;font-size:.82rem;letter-spacing:.14em;
+        backdrop-filter:blur(3px);
+      }
+      .shot-tag .dot{width:.5rem;height:.5rem;border-radius:50%;background:var(--gold2);box-shadow:0 0 8px var(--gold2)}
+      .speed-tag{
+        position:absolute;right:.8rem;top:.8rem;z-index:6;
+        background:rgba(16,12,5,.72);color:#f0e5c3;border:1px solid rgba(240,229,195,.25);
+        padding:.34rem .7rem;border-radius:3px;font-size:.82rem;letter-spacing:.08em;backdrop-filter:blur(3px);
+      }
+      .speed-tag b{color:var(--gold2)}
+      /* hero intro veil */
+      .veil{
+        position:absolute;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;
+        background:linear-gradient(100deg,rgba(10,8,4,.88) 30%,rgba(10,8,4,.55) 75%,rgba(10,8,4,.25));
+        opacity:1;transition:opacity .7s ease;padding:1rem;
+      }
+      .veil.hidden{opacity:0;pointer-events:none;display:none}
+      .veil-card{display:flex;gap:1.1rem;max-width:620px;width:100%;align-items:center;color:#f2e9d2}
+      .veil-card > div{min-width:0;flex:1 1 auto}
+      .veil-card img{
+        width:118px;height:158px;object-fit:cover;border-radius:4px;flex:none;
+        border:1px solid rgba(217,168,63,.6);box-shadow:0 10px 30px rgba(0,0,0,.6);
+      }
+      .veil-kicker{font-size:.75rem;letter-spacing:.4em;color:var(--gold2);margin:0 0 .3rem}
+      .veil-name{font-family:"Noto Serif SC",serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;margin:0;line-height:1.1}
+      .veil-role{color:#d8cba3;margin:.35rem 0 .55rem;font-size:.95rem}
+      .veil-desc{color:#efe7cd;font-size:.92rem;line-height:1.65;margin:0 0 .8rem;max-width:100%;overflow-wrap:break-word}
+      .veil-btn{
+        background:var(--gold);border:none;color:#181204;font-weight:700;letter-spacing:.15em;
+        padding:.55rem 1.2rem;border-radius:3px;font-size:.92rem;min-height:2.5rem;
+      }
+      .veil-btn:hover{background:var(--gold2)}
+      /* bottom-left legend on stage */
+      .legend{
+        position:absolute;left:.8rem;bottom:.8rem;z-index:6;display:flex;flex-wrap:wrap;gap:.35rem .8rem;
+        background:rgba(16,12,5,.66);color:#e9dfc0;padding:.4rem .65rem;border-radius:3px;font-size:.76rem;
+        border:1px solid rgba(240,229,195,.18);backdrop-filter:blur(3px);max-width:92%;
+      }
+      .legend span{display:inline-flex;align-items:center;gap:.35rem}
+      .sw{width:1rem;height:.55rem;border-radius:2px;display:inline-block}
+      .sw.gold{background:#c9962e}.sw.red{background:#b0402f}
+      .sw.line{height:0;border-top:3px solid #d9603f;border-radius:0;width:1.1rem}
+      .sw.line2{height:0;border-top:3px dashed #eebd55;border-radius:0;width:1.1rem}
+
+      /* ---------- controls ---------- */
+      .controls{
+        margin-top:.8rem;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+        padding:.8rem .9rem;box-shadow:0 6px 18px rgba(74,58,20,.08);
+      }
+      .ctl-row{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center}
+      #shotBtns{display:flex;flex-wrap:wrap;gap:.55rem}
+      @media (max-width:640px){
+        .veil{padding:.7rem;align-items:flex-start;overflow-y:auto}
+        .veil-card{flex-direction:row;gap:.7rem;align-items:flex-start}
+        .veil-card img{width:64px;height:84px}
+        .veil-name{font-size:1.35rem}
+        .veil-desc{font-size:.84rem;line-height:1.55}
+        .veil-btn{min-height:2.2rem;padding:.4rem .9rem}
+        .legend{display:none}
+        .shot-tag{top:auto;bottom:.6rem}
+        .tl-note{margin-top:.85rem !important;position:relative}
+        .tl-track{flex-wrap:wrap}
+        .timeline .tl-track{height:auto}
+        .timeline .tl-years{display:none}
+        .tl-track .tl-seg{min-height:3.9rem}
+        .tl-track .tl-seg .tl-name{display:block;white-space:normal;word-break:break-all;font-size:.7rem;line-height:1.3;padding:.3rem .22rem}
+        .tl-track .tl-seg .tl-yr{display:block;font-size:.58rem;color:var(--ink3);font-weight:400;margin-top:.12rem;word-break:break-all}
+        .tl-years{display:none}
+      }
+      .ctl-row + .ctl-row{margin-top:.65rem}
+      .ctl-label{font-size:.78rem;letter-spacing:.25em;color:var(--ink3);margin-right:.15rem}
+      .btn{
+        border:1px solid var(--line2);background:var(--panel2);color:var(--ink);
+        border-radius:4px;padding:.42rem .85rem;font-size:.9rem;min-height:2.4rem;
+      }
+      .btn:hover{border-color:var(--gold)}
+      .btn.primary{background:var(--gold);border-color:var(--gold);color:#fff8e6;font-weight:700;min-width:6.2rem}
+      @media (prefers-color-scheme: dark){ .btn.primary{color:#1a1405} }
+      .btn.primary:hover{background:var(--gold2)}
+      .btn.seg[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:700}
+      .btn.chap[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#fff8e6;font-weight:700}
+      @media (prefers-color-scheme: dark){ .btn.chap[aria-pressed="true"]{color:#1a1405} }
+      /* non-uniform timeline */
+      .timeline{margin-top:.75rem}
+      .tl-track{display:flex;gap:3px;height:2rem}
+      .tl-seg{
+        position:relative;border-radius:3px;background:var(--panel2);border:1px solid var(--line);
+        overflow:hidden;cursor:pointer;padding:0;text-align:left;min-height:2rem;
+      }
+      .tl-seg .fill{position:absolute;inset:0;width:0%;background:linear-gradient(90deg,var(--gold2),var(--gold));opacity:.85}
+      .tl-seg.done .fill{width:100%}
+      .tl-seg .tl-name{
+        position:relative;z-index:1;font-size:.74rem;color:var(--ink2);padding:.42rem .5rem;display:block;
+        white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      }
+      .tl-seg[aria-pressed="true"]{border-color:var(--gold)}
+      .tl-seg[aria-pressed="true"] .tl-name{color:var(--ink);font-weight:700}
+      .tl-yr{display:none}
+      .tl-years{display:flex;gap:3px;margin-top:.3rem}
+      .tl-years span{font-size:.7rem;color:var(--ink3);padding:0 .5rem;white-space:nowrap;overflow:hidden}
+
+      /* ---------- side panel ---------- */
+      .panel{
+        background:var(--panel);border:1px solid var(--line);border-radius:10px;
+        padding:1.15rem 1.2rem 1.25rem;box-shadow:0 6px 18px rgba(74,58,20,.08);
+        position:sticky;top:1rem;
+      }
+      @media (max-width:1020px){ .panel{position:static} }
+      .ch-kicker{font-size:.78rem;letter-spacing:.3em;color:var(--gold);margin:0 0 .35rem;font-weight:700}
+      .ch-title{font-family:"Noto Serif SC",serif;font-weight:900;font-size:1.65rem;line-height:1.25;margin:0 0 .2rem}
+      .ch-years{color:var(--ink3);font-size:.88rem;margin:0 0 .8rem;letter-spacing:.06em}
+      .hero-line{
+        display:flex;gap:.8rem;align-items:center;background:var(--panel2);
+        border:1px solid var(--line);border-radius:6px;padding:.6rem .7rem;margin-bottom:.9rem;
+      }
+      .hero-line img{width:46px;height:60px;object-fit:cover;border-radius:3px;flex:none}
+      .hero-line .hn{font-family:"Noto Serif SC",serif;font-weight:900;font-size:1.02rem}
+      .hero-line .hr{font-size:.8rem;color:var(--ink2);line-height:1.45}
+      .narr{font-size:.96rem;line-height:1.85;color:var(--ink);margin:0 0 .7rem}
+      .narr b{color:var(--gold)}
+      @media (prefers-color-scheme: dark){ .narr b{color:var(--gold2)} }
+      .facts{margin:.4rem 0 0;padding:0;list-style:none}
+      .facts li{
+        font-size:.88rem;line-height:1.6;color:var(--ink2);padding:.42rem 0 .42rem 1rem;position:relative;
+        border-top:1px dashed var(--line);
+      }
+      .facts li::before{content:"";position:absolute;left:0;top:.95rem;width:.42rem;height:.42rem;background:var(--gold);transform:rotate(45deg)}
+      .facts li b{color:var(--ink)}
+      /* balance of power */
+      .balance{margin-top:1rem}
+      .balance .b-head{display:flex;justify-content:space-between;font-size:.78rem;color:var(--ink2);letter-spacing:.1em;margin-bottom:.35rem}
+      .b-bar{display:flex;height:.85rem;border-radius:3px;overflow:hidden;border:1px solid var(--line2)}
+      .b-ming{background:linear-gradient(90deg,#b0402f,#c65a44);transition:width 1.2s cubic-bezier(.6,0,.2,1)}
+      .b-jin{background:linear-gradient(90deg,#c9962e,#e0aa3e);transition:width 1.2s cubic-bezier(.6,0,.2,1)}
+      .b-note{font-size:.76rem;color:var(--ink3);margin-top:.35rem;line-height:1.5}
+      /* sarhu steps */
+      .steps{margin-top:1rem;display:none}
+      .steps.show{display:block}
+      .steps h3{font-size:.8rem;letter-spacing:.25em;color:var(--ink3);margin:0 0 .5rem;font-weight:700}
+      .step-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem}
+      .step-btns .btn{padding:.4rem .3rem;font-size:.84rem;text-align:center}
+      .step-btns .btn[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+      .step-desc{
+        margin-top:.6rem;font-size:.9rem;line-height:1.7;color:var(--ink);
+        background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:.65rem .8rem;min-height:4.6rem;
+      }
+      .step-desc b{color:var(--red)}
+      /* grievances card */
+      .griev{display:none;margin-top:1rem;border:1px solid var(--line2);border-radius:6px;background:var(--panel2);padding:.8rem .95rem}
+      .griev.show{display:block}
+      .griev h3{font-family:"Noto Serif SC",serif;margin:0 0 .5rem;font-size:1.02rem;font-weight:900}
+      .griev ol{margin:0;padding-left:1.25rem;font-size:.86rem;line-height:1.75;color:var(--ink2)}
+      .griev ol b{color:var(--ink)}
+      /* epilogue chain */
+      .chain{display:none;margin-top:1rem}
+      .chain.show{display:block}
+      .chain h3{font-size:.8rem;letter-spacing:.25em;color:var(--ink3);margin:0 0 .6rem;font-weight:700}
+      .chain ol{list-style:none;margin:0;padding:0;position:relative}
+      .chain ol::before{content:"";position:absolute;left:.52rem;top:.6rem;bottom:.6rem;width:2px;background:linear-gradient(180deg,var(--red),var(--gold))}
+      .chain li{position:relative;padding:.35rem 0 .55rem 1.7rem}
+      .chain li::before{content:"";position:absolute;left:.22rem;top:.62rem;width:.62rem;height:.62rem;border-radius:50%;background:var(--panel);border:3px solid var(--gold)}
+      .chain li:first-child::before{border-color:var(--red)}
+      .chain .cy{font-family:"Noto Serif SC",serif;font-weight:900;font-size:1.05rem}
+      .chain .ct{font-weight:700;font-size:.92rem;margin-left:.4rem}
+      .chain .cd{display:block;font-size:.85rem;color:var(--ink2);line-height:1.65;margin-top:.15rem}
+      /* parallel lines (transition chapter) */
+      .parallel{display:none;margin-top:1rem}
+      .parallel.show{display:block}
+      .parallel h3{font-size:.8rem;letter-spacing:.25em;color:var(--ink3);margin:0 0 .6rem;font-weight:700}
+      .p-line{border:1px solid var(--line);border-radius:6px;padding:.65rem .8rem;margin-bottom:.55rem;background:var(--panel2)}
+      .p-line .p-head{font-family:"Noto Serif SC",serif;font-weight:900;font-size:.98rem;margin-bottom:.3rem}
+      .p-line.ming .p-head{color:var(--red)}
+      .p-line.qing .p-head{color:var(--gold)}
+      .p-line ol{list-style:none;margin:0;padding:0}
+      .p-line li{font-size:.85rem;color:var(--ink2);line-height:1.6;padding:.18rem 0 .18rem .9rem;position:relative}
+      .p-line li::before{content:"";position:absolute;left:0;top:.62rem;width:.4rem;height:.4rem;transform:rotate(45deg);background:var(--ink3)}
+      .p-line li b{color:var(--ink)}
+      .qing-btn{width:100%;margin-top:.2rem;background:var(--gold);border:1px solid var(--gold);color:#fff8e6;font-weight:700;border-radius:4px;padding:.55rem;font-size:.92rem;letter-spacing:.1em;min-height:2.6rem}
+      @media (prefers-color-scheme: dark){ .qing-btn{color:#1a1405} }
+      .qing-btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+      /* people layer info card */
+      .pcard{
+        position:absolute;right:.8rem;bottom:.8rem;z-index:7;width:min(258px,78vw);
+        background:rgba(16,12,5,.88);color:#f0e5c3;border:1px solid rgba(217,168,63,.5);
+        border-radius:6px;padding:.7rem .85rem;backdrop-filter:blur(3px);
+        opacity:1;pointer-events:auto;display:none;
+      }
+      .pcard.show{pointer-events:auto;display:block}
+      .pcard .pn{font-family:"Noto Serif SC",serif;font-weight:900;font-size:1.12rem;margin:0}
+      .pcard .pr{font-size:.76rem;color:#d9a83f;letter-spacing:.12em;margin:.15rem 0 .4rem}
+      .pcard .ps{font-size:.86rem;line-height:1.65;margin:0;color:#efe7cd}
+      .pcard .pl{font-size:.76rem;color:#bfae83;margin:.4rem 0 0}
+      .pcard .px{
+        position:absolute;top:.3rem;right:.3rem;background:none;border:none;color:#d8cba3;
+        font-size:1rem;line-height:1;min-height:2rem;min-width:2rem;cursor:pointer;
+      }
+      .person{cursor:pointer}
+      .person text{pointer-events:none}
+      /* ---------- true 3D stage (Three.js WebGL) ---------- */
+      #glHost{position:absolute;inset:0;z-index:2}
+      #glHost canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+      #glHost canvas:active{cursor:grabbing}
+      body.gl-on .persp{display:none}
+      #glError{
+        position:absolute;left:.8rem;bottom:3.4rem;z-index:9;display:none;max-width:92%;
+        background:rgba(122,32,20,.94);color:#fff;padding:.5rem .8rem;border-radius:4px;font-size:.82rem;line-height:1.5;
+      }
+      #glError.show{display:block}
+      .drag-hint{
+        position:absolute;right:.8rem;bottom:.8rem;z-index:5;display:none;
+        background:rgba(16,12,5,.66);color:#e9dfc0;border:1px solid rgba(240,229,195,.18);
+        padding:.34rem .65rem;border-radius:3px;font-size:.76rem;letter-spacing:.06em;backdrop-filter:blur(3px);
+      }
+      body.gl-on .drag-hint{display:block}
+      @media (max-width:640px){ .drag-hint{display:none !important} }
+      footer.act-foot{max-width:1440px;margin:0 auto;padding:0 1.25rem 2rem;color:var(--ink3);font-size:.8rem;line-height:1.7}
+    </style>
+  </head>
+  <body>
+    <header class="act-head">
+      <span class="act-no">第一幕</span>
+      <h1 class="act-title">赫图阿拉到萨尔浒</h1>
+      <p class="act-sub">1583 – 1627 · 主人公 <b>努尔哈赤</b> · 一张会讲故事的地图：版图在长大，路线在收紧，攻守在四十四年里悄悄换了边。</p>
+    </header>
+
+    <div class="layout">
+      <div class="stage-wrap">
+        <div class="stage" id="stage">
+          <div class="sky"></div>
+          <div id="glHost" aria-label="辽东三维地形沙盘（Three.js 渲染）：地形为 SRTM 实测高程 DEM，底图为 OpenStreetMap，可拖拽环绕、滚轮缩放"></div>
+          <div id="glError" role="alert"></div>
+          <div class="persp">
+            <div class="tilt">
+              <div class="cam" id="cam">
+                <svg viewBox="0 0 1000 700" role="img" aria-label="辽东近3D示意地图：赫图阿拉、抚顺、萨尔浒、沈阳、辽阳、开原、叶赫与科尔沁的位置，后金版图随章节扩张">
+                  <defs>
+                    <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#eadfc0"/>
+                      <stop offset="1" stop-color="#ddcda1"/>
+                    </linearGradient>
+                    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#7fa8a0"/>
+                      <stop offset="1" stop-color="#5d8a84"/>
+                    </linearGradient>
+                    <marker id="arrRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                      <path d="M0,0 L10,5 L0,10 z" fill="#b0402f"/>
+                    </marker>
+                    <marker id="arrGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                      <path d="M0,0 L10,5 L0,10 z" fill="#a5761a"/>
+                    </marker>
+                  </defs>
+
+                  <!-- land: real basemap (OpenStreetMap mosaic of the same geographic frame) -->
+                  <rect x="0" y="0" width="1000" height="700" fill="url(#land)"/>
+                  <image href="assets/basemap.jpg" x="0" y="0" width="1000" height="700" preserveAspectRatio="none" opacity=".92"/>
+                  <text x="212" y="592" font-size="21" fill="#2e5f5a" letter-spacing="6" font-family="Noto Serif SC,serif" font-weight="700">辽东湾</text>
+                  <!-- Korea direction -->
+                  <text x="838" y="556" font-size="20" fill="#7a6a45" letter-spacing="4" font-family="Noto Serif SC,serif" font-weight="700">朝鲜</text>
+                  <!-- mountains east -->
+                  <g fill="#b7a678" stroke="#8f7f52" stroke-width="1" opacity=".8">
+                    <path d="M949,324 l16,-30 l16,30 z"/><path d="M922,340 l14,-26 l14,26 z"/>
+                    <path d="M884,330 l14,-24 l14,24 z"/><path d="M936,366 l13,-22 l13,22 z"/>
+                    <path d="M700,470 l13,-22 l13,22 z"/><path d="M726,486 l12,-20 l12,20 z"/>
+                    <path d="M560,400 l11,-18 l11,18 z"/><path d="M584,414 l10,-16 l10,16 z"/>
+                  </g>
+                  <text x="892" y="292" font-size="16" fill="#7a6a45" letter-spacing="3" font-family="Noto Serif SC,serif">长白山</text>
+                  <!-- rivers -->
+                  <g fill="none" stroke="#6d9a94" stroke-width="5" stroke-linecap="round" opacity=".8">
+                    <path d="M658,320 L612,330 L545,339 L510,346 L493,350 L459,361 L434,384"/>
+                    <path d="M566,148 L546,222 L523,283 L485,330 L449,363 L429,417 L398,464 L370,502 L357,532"/>
+                    <path d="M653,374 L624,369 L592,357 L563,346"/>
+                    <path d="M985,343 L888,390 L776,451 L673,478 L631,494 L592,565 L584,613"/>
+                    <path d="M582,411 L528,419 L473,421 L444,438 L431,415"/>
+                  </g>
+                  <text x="512" y="326" font-size="14" fill="#4d7a74" font-family="Noto Serif SC,serif">浑河</text>
+                  <text x="452" y="322" font-size="14" fill="#4d7a74" font-family="Noto Serif SC,serif">辽河</text>
+                  <text x="596" y="398" font-size="13" fill="#4d7a74" font-family="Noto Serif SC,serif">苏子河</text>
+                  <text x="700" y="522" font-size="13" fill="#4d7a74" font-family="Noto Serif SC,serif">鸭绿江</text>
+
+                  <!-- Ming sphere wash (west & south) -->
+                  <path d="M0,0 L551,0 L530,237 L508,293 L469,340 L434,375 L414,429 L387,476 L356,502 L343,539 L343,700 L0,700 Z"
+                        fill="#b0402f" opacity=".13"/>
+                  <text x="140" y="322" font-size="30" fill="#a33327" opacity=".55" letter-spacing="10" font-family="Noto Serif SC,serif" font-weight="900">大 明</text>
+                  <text x="156" y="358" font-size="15" fill="#a33327" opacity=".55" letter-spacing="4" font-family="Noto Serif SC,serif">辽东都司</text>
+                  <!-- west exit -->
+                  <g>
+                    <path d="M110,590 L64,590" stroke="#8a7d63" stroke-width="3" marker-end="url(#arrGold)" opacity=".0"/>
+                    <circle cx="110" cy="590" r="5" fill="#8f8570"/>
+                    <text x="24" y="620" font-size="14" fill="#7a6a45" font-family="Noto Serif SC,serif">山海关 → 北京</text>
+                  </g>
+
+                  <!-- Later Jin territory stages -->
+                  <g fill="#c9962e" stroke="#8a5f10" stroke-width="2.5">
+                    <path class="terr" data-stage="0" d="M566,330 L628,303 L689,330 L699,397 L648,438 L582,417 L556,377 Z" opacity="0"/>
+                    <path class="terr" data-stage="1" d="M541,296 L612,222 L714,242 L786,323 L745,431 L612,464 L546,411 L520,350 Z" opacity="0"/>
+                    <path class="terr" data-stage="2" d="M510,256 L633,148 L776,175 L888,283 L847,444 L673,491 L541,444 L480,363 Z" opacity="0"/>
+                    <path class="terr" data-stage="3" d="M536,323 L571,262 L673,202 L796,242 L888,296 L837,458 L653,485 L541,438 L520,384 Z" opacity="0"/>
+                    <path class="terr" data-stage="4" d="M485,303 L541,215 L643,141 L776,175 L888,283 L847,444 L673,491 L536,444 L480,370 Z" opacity="0"/>
+                    <path class="terr" data-stage="5" fill="#b8860b" stroke="#6e4d08" d="M444,323 L541,215 L643,141 L776,175 L888,283 L847,444 L673,498 L551,518 L439,471 L423,390 Z" opacity="0"/>
+                  </g>
+                  <g id="shengjingMark" opacity="0">
+                    <path d="M493,333 l3.4,7 7.7,1.1 -5.6,5.4 1.3,7.6 -6.8,-3.6 -6.8,3.6 1.3,-7.6 -5.6,-5.4 7.7,-1.1 z" fill="#8a5f10"/>
+                    <text x="443" y="381" font-size="14.5" font-weight="900" fill="#6e4d08" font-family="Noto Serif SC,serif">盛京（沈阳）· 大清都城</text>
+                  </g>
+                  <g class="city"><circle cx="215" cy="509" r="5.5" fill="#7a4a3a"/><text x="169" y="497" font-size="14" fill="#4a3a1c" font-family="Noto Serif SC,serif">宁远</text></g>
+                  <g class="city"><rect x="251" y="437" width="13" height="13" fill="#8c4a38"/><text x="212" y="431" font-size="14.5" font-weight="700" fill="#5d2f22" font-family="Noto Serif SC,serif">锦州</text></g>
+                  <text id="jinLabel" x="648" y="296" font-size="24" fill="#7c5510" letter-spacing="6" font-family="Noto Serif SC,serif" font-weight="900" opacity="0">后 金</text>
+
+                  <!-- alliance with Khorchin -->
+                  <g id="alliance" opacity="0">
+                    <path d="M617,352 C540,210 450,130 385,106" fill="none" stroke="#a5761a" stroke-width="3.5" stroke-dasharray="10 8"/>
+                    <circle cx="500" cy="185" r="17" fill="#a5761a"/>
+                    <text x="500" y="192" font-size="17" fill="#fff6da" text-anchor="middle" font-family="Noto Serif SC,serif" font-weight="900">盟</text>
+                    <text x="392" y="150" font-size="14" fill="#7c5510" font-family="Noto Serif SC,serif">联姻结盟 · 互为援应</text>
+                  </g>
+
+                  <!-- 1618 attacks -->
+                  <g id="attack1618" opacity="0" fill="none" stroke="#a5761a" stroke-width="4">
+                    <path d="M617,355 C590,348 568,343 552,340" marker-end="url(#arrGold)"/>
+                    <path d="M620,368 C610,375 600,380 594,383" marker-end="url(#arrGold)"/>
+                  </g>
+
+                  <!-- 1619 Ming four routes -->
+                  <g id="routes1619" opacity="0" fill="none" stroke="#b0402f" stroke-width="4.5" stroke-linecap="round">
+                    <path class="route" data-route="west"  d="M493,350 L520,344 L545,339 L558,342" pathLength="100" marker-end="url(#arrRed)"/>
+                    <path class="route" data-route="north" d="M555,252 L548,290 L543,320" pathLength="100" marker-end="url(#arrRed)"/>
+                    <path class="route" data-route="east"  d="M631,494 L624,430 L610,395 L604,380" pathLength="100" marker-end="url(#arrRed)"/>
+                    <path class="route" data-route="south" d="M473,421 L530,400 L572,389" pathLength="100" marker-end="url(#arrRed)"/>
+                  </g>
+                  <!-- 1619 Jin counterattacks -->
+                  <g id="counter1619" opacity="0" fill="none" stroke="#a5761a" stroke-width="5" stroke-linecap="round">
+                    <path class="counter" data-counter="west"  d="M617,355 C595,350 578,346 565,344" pathLength="100" marker-end="url(#arrGold)"/>
+                    <path class="counter" data-counter="north" d="M558,338 C550,330 545,326 542,322" pathLength="100" marker-end="url(#arrGold)"/>
+                    <path class="counter" data-counter="east"  d="M620,366 C612,372 606,377 602,381" pathLength="100" marker-end="url(#arrGold)"/>
+                  </g>
+                  <!-- battle result badges -->
+                  <g font-family="Noto Serif SC,serif" font-weight="900">
+                    <g class="badge" data-badge="west" opacity="0">
+                      <circle cx="561" cy="343" r="15" fill="#a33327"/><text x="561" y="350" font-size="17" fill="#ffe9d9" text-anchor="middle">✕</text>
+                      <text x="520" y="374" font-size="14" fill="#a33327">杜松战死</text>
+                    </g>
+                    <g class="badge" data-badge="north" opacity="0">
+                      <circle cx="541" cy="320" r="15" fill="#a33327"/><text x="541" y="327" font-size="17" fill="#ffe9d9" text-anchor="middle">✕</text>
+                      <text x="489" y="296" font-size="14" fill="#a33327">马林败亡 · 尚间崖</text>
+                    </g>
+                    <g class="badge" data-badge="east" opacity="0">
+                      <circle cx="600" cy="382" r="15" fill="#a33327"/><text x="600" y="389" font-size="17" fill="#ffe9d9" text-anchor="middle">✕</text>
+                      <text x="546" y="424" font-size="14" fill="#a33327">刘綎战死 · 阿布达里冈</text>
+                    </g>
+                    <g class="badge" data-badge="south" opacity="0">
+                      <circle cx="575" cy="392" r="14" fill="#8f8570"/><text x="575" y="399" font-size="15" fill="#fff" text-anchor="middle">退</text>
+                      <text x="509" y="428" font-size="14" fill="#6d6350">李如柏退兵</text>
+                    </g>
+                  </g>
+
+                  <!-- cities -->
+                  <g font-family="Noto Serif SC,serif">
+                    <!-- Khorchin -->
+                    <g class="city"><circle cx="371" cy="101" r="7" fill="#8a6d2f"/><text x="351" y="81" font-size="17" font-weight="700" fill="#5d4a1e">科尔沁蒙古</text></g>
+                    <!-- Yehe -->
+                    <g class="city"><circle cx="588" cy="194" r="6" fill="#6d5a33"/><text x="602" y="188" font-size="15" fill="#4a3a1c">叶赫</text></g>
+                    <!-- Kaiyuan / Tieling -->
+                    <g class="city"><circle cx="555" cy="252" r="6" fill="#7a4a3a"/><text x="511" y="244" font-size="15" fill="#4a3a1c">开原</text></g>
+                    <g class="city"><circle cx="523" cy="293" r="5" fill="#7a4a3a"/><text x="469" y="299" font-size="14" fill="#4a3a1c">铁岭</text></g>
+                    <!-- Shenyang / Liaoyang -->
+                    <g class="city"><rect x="486" y="343" width="15" height="15" fill="#8c4a38"/><text x="466" y="333" font-size="16" font-weight="700" fill="#5d2f22">沈阳</text></g>
+                    <g class="city"><rect x="466" y="414" width="15" height="15" fill="#8c4a38"/><text x="438" y="454" font-size="16" font-weight="700" fill="#5d2f22">辽阳</text></g>
+                    <!-- Fushun -->
+                    <g class="city"><rect x="538" y="332" width="14" height="14" fill="#8c4a38"/><text x="526" y="322" font-size="16" font-weight="700" fill="#5d2f22">抚顺</text></g>
+                    <!-- Qinghe -->
+                    <g class="city"><circle cx="589" cy="386" r="6" fill="#7a4a3a"/><text x="599" y="380" font-size="14" fill="#4a3a1c">清河城</text></g>
+                    <!-- Sarhuda -->
+                    <g class="city" id="sarhuMark">
+                      <circle cx="561" cy="343" r="6" fill="#a33327"/>
+                      <text x="501" y="351" font-size="16" font-weight="900" fill="#a33327">萨尔浒</text>
+                    </g>
+                    <!-- Hetuala capital -->
+                    <g class="city" id="capitalMark">
+                      <circle cx="625" cy="361" r="17" fill="#c9962e" opacity=".3">
+                        <animate attributeName="r" values="12;22;12" dur="2.6s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values=".45;.05;.45" dur="2.6s" repeatCount="indefinite"/>
+                      </circle>
+                      <path d="M625,347 l4.2,8.6 9.5,1.4 -6.9,6.7 1.6,9.4 -8.4,-4.4 -8.4,4.4 1.6,-9.4 -6.9,-6.7 9.5,-1.4 z" fill="#a5761a" stroke="#6e4d08" stroke-width="1"/>
+                      <text x="599" y="407" font-size="19" font-weight="900" fill="#6e4d08">赫图阿拉</text>
+                      <text id="capSub" x="599" y="427" font-size="12.5" fill="#7c651f" opacity="0">后金都城 · 1616</text>
+                    </g>
+                    <!-- Kuandian -->
+                    <g class="city"><circle cx="631" cy="494" r="5" fill="#7a4a3a"/><text x="599" y="520" font-size="13.5" fill="#4a3a1c">宽甸</text></g>
+                  </g>
+                  <g id="peopleLayer"></g>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="shot-tag"><span class="dot"></span><span id="shotTag">中景 · 城池攻守</span></div>
+          <div class="speed-tag" id="speedTag">时间流速 <b>中速</b></div>
+
+          <div class="veil" id="veil">
+            <div class="veil-card">
+              <img src="assets/nurhaci.webp" alt="努尔哈赤画像（绘画风格）" />
+              <div>
+                <p class="veil-kicker">主人公</p>
+                <p class="veil-name" id="veilName">努尔哈赤</p>
+                <p class="veil-role" id="veilRole">建州女真首领 · 时年二十五岁</p>
+                <p class="veil-desc" id="veilDesc"></p>
+                <button class="veil-btn" id="veilBtn" type="button">进入战场 →</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="pcard" id="pcard" aria-live="polite">
+            <button class="px" id="pcardClose" type="button" aria-label="关闭人物卡">✕</button>
+            <p class="pn" id="pcName"></p>
+            <p class="pr" id="pcRole"></p>
+            <p class="ps" id="pcStatus"></p>
+            <p class="pl" id="pcLoc"></p>
+          </div>
+
+          <div class="legend">
+            <span><i class="sw gold"></i>后金版图</span>
+            <span><i class="sw red"></i>明朝辖地</span>
+            <span><i class="sw line"></i>明军进军路线</span>
+            <span><i class="sw line2"></i>盟约 / 后金反击</span>
+            <span>地形：SRTM 实测高程 · 底图：OpenStreetMap</span>
+          </div>
+          <div class="drag-hint">拖拽环绕 · 滚轮缩放 · 点人物看支线</div>
+          <div class="vignette"></div>
+        </div>
+
+        <div class="controls">
+          <div class="ctl-row">
+            <button class="btn primary" id="playBtn" type="button">▶ 播放第一幕</button>
+            <button class="btn" id="prevBtn" type="button">← 上一场</button>
+            <button class="btn" id="nextBtn" type="button">下一场 →</button>
+            <span class="ctl-label" style="margin-left:.4rem">景别</span>
+            <span id="shotBtns">
+              <button class="btn seg" type="button" data-shot="0">全景</button>
+              <button class="btn seg" type="button" data-shot="1">远景</button>
+              <button class="btn seg" type="button" data-shot="2">中景</button>
+              <button class="btn seg" type="button" data-shot="3">近景</button>
+              <button class="btn seg" type="button" data-shot="4">特写</button>
+            </span>
+            <button class="btn seg" id="peopleToggle" type="button" aria-pressed="true" style="margin-left:.4rem">支线人物层 · 开</button>
+          </div>
+          <div class="timeline">
+            <div class="tl-track" id="tlTrack"></div>
+            <div class="tl-years" id="tlYears"></div>
+          </div>
+          <p class="tl-note" style="margin:.55rem 0 0;font-size:.78rem;color:var(--ink3);line-height:1.6">
+            时间轴不是匀速的：每段的宽度就是它在故事里占的时长——统一与结盟快进，萨尔浒一段独占一半以上，尾声八年则再次加速掠过。
+          </p>
+        </div>
+      </div>
+
+      <aside class="panel" aria-live="polite">
+        <p class="ch-kicker" id="chKicker">第一场</p>
+        <h2 class="ch-title" id="chTitle"></h2>
+        <p class="ch-years" id="chYears"></p>
+        <div class="hero-line">
+          <img src="assets/nurhaci.webp" alt="努尔哈赤画像（绘画风格）" />
+          <div>
+            <div class="hn" id="heroName">努尔哈赤</div>
+            <div class="hr" id="heroRole"></div>
+          </div>
+        </div>
+        <div id="chNarr"></div>
+        <ul class="facts" id="chFacts"></ul>
+
+        <div class="balance">
+          <div class="b-head"><span>明 · 辽东军力</span><span>攻守之势</span><span>后金</span></div>
+          <div class="b-bar"><div class="b-ming" id="bMing" style="width:88%"></div><div class="b-jin" id="bJin" style="width:12%"></div></div>
+          <p class="b-note" id="bNote"></p>
+        </div>
+
+        <div class="steps" id="stepsBox">
+          <h3>萨尔浒 · 五日决战（万历四十七年三月）</h3>
+          <div class="step-btns" id="stepBtns"></div>
+          <div class="step-desc" id="stepDesc"></div>
+        </div>
+
+        <div class="griev" id="grievBox">
+          <h3>七大恨（万历四十六年 · 1618）</h3>
+          <ol>
+            <li>明无端杀其<b>祖父觉昌安、父塔克世</b></li>
+            <li>明偏袒<b>叶赫、哈达</b>，压制建州</li>
+            <li>明违背边境之约，遣使斥责、迫令退地</li>
+            <li>明遣兵<b>护卫叶赫</b>，与建州为敌</li>
+            <li>叶赫恃明之助，<b>悔婚</b>，将已许之女转嫁蒙古</li>
+            <li>明迫令放弃<b>柴河、三岔、抚安</b>久耕之地</li>
+            <li>明遣萧伯芝赴建州，<b>作威作福</b>，欺凌部众</li>
+          </ol>
+        </div>
+
+        <div class="chain" id="chainBox">
+          <h3>连锁反应 · 1619 → 1627</h3>
+          <ol>
+            <li>
+              <span class="cy">1619</span><span class="ct">萨尔浒 · 辽东主力丧失</span>
+              <span class="cd">明军辽东精锐一战尽丧，开原、铁岭旋即失守，叶赫被吞并。辽东从此由攻转守，防线退缩到辽阳、沈阳一线。</span>
+            </li>
+            <li>
+              <span class="cy">1620</span><span class="ct">万历崩 · 泰昌一月</span>
+              <span class="cd">为填补辽东亏空，辽饷加派已自 1618 年开始层层摊入田赋，财政与民力同受挤压。万历四十八年，万历帝去世；泰昌帝即位仅一月暴毙，十五岁的天启帝被推上皇位。</span>
+            </li>
+            <li>
+              <span class="cy">1621–1627</span><span class="ct">天启 · 辽事糜烂与党争</span>
+              <span class="cd">沈阳、辽阳相继陷落，辽西成为唯一屏障；辽饷屡增而军情屡急。朝中东林与阉党之争随辽事败坏而激化，经略人选朝令夕改，前线与朝廷彼此掣肘。</span>
+            </li>
+            <li>
+              <span class="cy">1627</span><span class="ct">崇祯即位 · 摊子已成</span>
+              <span class="cd">天启七年，天启帝去世，无子，弟信王朱由检即位，是为崇祯。萨尔浒没有直接把他推上皇位——但他接手的，正是这条八年链条的末端：空虚的辽东、见底的财政、撕裂的朝廷。第二幕的故事，将从这里开始。</span>
+            </li>
+          </ol>
+        </div>
+        </aside>
+    </div>
+
+    <footer class="act-foot">
+      地形与底图为真实地理数据：高程取 SRTM 实测 DEM（Terrain Tiles / OpenDEM 同源数据），底图为 © OpenStreetMap contributors（ODbL），城池、河流与路线按真实经纬度（东经 118.6°–128.4°、北纬 39.2°–44.4°）落位，高程经适度夸张以便观看；版图边界为依史实大势绘制的示意范围。兵力数字取通行记载之约数（明军实数约八九万、朝鲜军万余、叶赫助兵，后金约六万，号称之数另计）。人物画像为绘画风格再创作。
+    </footer>
+
+    <script src="assets/three.min.js"></script>
+    <script>
+    (function(){
+      "use strict";
+      var $ = function(s){ return document.querySelector(s); };
+      var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+      var SHOTS = [
+        {name:"全景", desc:"全景 · 国势与版图", scale:1},
+        {name:"远景", desc:"远景 · 路线与防线", scale:1.5},
+        {name:"中景", desc:"中景 · 城池攻守", scale:2.05},
+        {name:"近景", desc:"近景 · 排兵布阵", scale:2.9},
+        {name:"特写", desc:"特写 · 人与他的决定", scale:4.15}
+      ];
+
+      var CHAPTERS = [
+        {
+          kicker:"第一场 · 起兵", title:"十三副甲起兵", years:"1583 — 1588 · 建州左卫",
+          weight:6, duration:8000, speed:"中速", shot:0, focus:[62,52], terr:0,
+          heroRole:"建州女真首领 · 时年二十五岁",
+          veil:"祖父、父亲在古勒城之役中被明军误杀。他向明廷讨还遗甲，只得十三副铠甲——他就以这十三副甲起兵，从攻打图伦城开始，一步步走上统一建州之路。",
+          narr:[
+            "万历十一年（1583），二十五岁的努尔哈赤以<b>十三副遗甲</b>起兵。他的起点小得不能再小：建州女真散为五部，彼此攻杀，明廷则以「分而治之」的羁縻之策居中制衡。",
+            "但他打仗极有耐心：先弱后强、招抚与征伐并用，五年之内，建州五部基本归于一统。地图上赫图阿拉周围那一小块金色，就是后来一切故事的种子。"
+          ],
+          facts:[
+            "<b>1583</b> · 以十三副甲起兵，攻图伦城，开启统一建州之战",
+            "<b>1588</b> · 建州五部大体统一，筑城于费阿拉山城",
+            "此时他的地盘，不过辽东边墙外一隅——明廷眼中，他仍是「恭顺」的建州都指挥使"
+          ],
+          balance:[88,"明强金弱：后金尚未存在，建州只是女真诸部之一。"],
+          alliance:false, attack:false, routes:false, griev:false, chain:false, steps:false
+        },
+        {
+          kicker:"第二场 · 统一女真", title:"古勒山一战定诸部", years:"1593 — 1607 · 女真诸部",
+          weight:7, duration:9000, speed:"快进", shot:1, focus:[59,33], terr:1,
+          heroRole:"建州之主 · 正在吞并女真诸部的征服者",
+          veil:"1593年，海西女真叶赫部纠合九部联军三万来攻。努尔哈赤在古勒山以逸待劳，一战破之——此后诸部闻风而降，统一女真只剩下时间问题。",
+          narr:[
+            "万历二十一年（1593），叶赫、哈达、乌拉、辉发等<b>九部联军</b>三万人分三路来犯。努尔哈赤登古勒山布阵，先破其先锋，再乘胜追击，九部联军溃散。",
+            "古勒山之战是转折点：此后十四年，哈达、辉发、乌拉相继被吞并，海西女真只剩叶赫孤悬。镜头拉远看——金色版图正沿着松花江与辽河上游，一块一块向北漫开。"
+          ],
+          facts:[
+            "<b>1593</b> · 古勒山之战，以少胜多击溃九部联军",
+            "<b>1599–1613</b> · 灭哈达、辉发、乌拉，海西四部去其三",
+            "<b>1615</b> · 整编八旗：黄、白、红、蓝四旗扩为八旗，军民一体",
+            "叶赫因受明廷庇护未下——这笔账，被记进了后来的「七大恨」"
+          ],
+          balance:[76,"攻守未变，但建州已从一部变为诸部之主，明廷的羁縻开始失效。"],
+          alliance:false, attack:false, routes:false, griev:false, chain:false, steps:false
+        },
+        {
+          kicker:"第三场 · 建国结盟", title:"建立后金 · 北联蒙古", years:"1615 — 1616 · 赫图阿拉",
+          weight:6, duration:8000, speed:"中速", shot:0, focus:[50,36], terr:2,
+          heroRole:"大金国汗 · 五十八岁",
+          veil:"1616年正月，努尔哈赤在赫图阿拉称汗，国号大金——史称后金。与此同时，他用联姻与会盟把科尔沁蒙古绑上战车：西边的敌人，先变成盟友。",
+          narr:[
+            "全景拉开：万历四十四年（1616），努尔哈赤正式建国称汗。八旗制度把女真社会改造成一架战争机器——<b>出则为兵，入则为民</b>，动员效率远非明军卫所可比。",
+            "更关键的一步在西北：他与<b>科尔沁蒙古</b>联姻结盟。地图上那条金色虚线，意味着日后清军可以绕过辽东防线、借道蒙古直叩关内——1616年埋下的线，要到十多年后才收紧。"
+          ],
+          facts:[
+            "<b>1616</b> · 赫图阿拉称汗，建元天命，国号大金（后金）",
+            "<b>1612 起</b> · 与科尔沁部联姻会盟，蒙古骑兵成为翼侧",
+            "建国即是宣战姿态：一个与明廷平行的政权，在边墙外立了起来"
+          ],
+          balance:[68,"后金已成一国之势：有都城、有汗号、有八旗、有盟友。"],
+          alliance:true, attack:false, routes:false, griev:false, chain:false, steps:false
+        },
+        {
+          kicker:"第四场 · 宣战", title:"七大恨 · 兵出抚顺", years:"1618 · 天命三年",
+          weight:8, duration:10000, speed:"放慢", shot:2, focus:[55,48], terr:3,
+          heroRole:"后金大汗 · 向明朝宣战的人",
+          veil:"1618年四月，努尔哈赤以「七大恨」誓师祭天——三十五年的积怨被写成一份战书。誓师当日，他亲率两万八旗，直扑抚顺。",
+          narr:[
+            "「七大恨」不是一时之怒，而是把三十五年里祖父之死、叶赫悔婚、边境退地一笔笔算清的总账（全文见右侧）。它既是檄文，也是动员令：<b>从此不再是部落纠纷，而是两国之战</b>。",
+            "抚顺守将李永芳出降，清河城副将邹储贤战死。努尔哈赤的打法已成型：诱明军出城野战、围点打援、招降纳叛。镜头推近抚顺——明廷这才意识到，边墙外的那个人，不再是可以招安的对象。"
+          ],
+          facts:[
+            "<b>1618 年四月</b> · 发布「七大恨」，攻克抚顺，李永芳降",
+            "<b>1618 年七月</b> · 破清河城，副将邹储贤等战死",
+            "明廷震动：调兵遣将，以杨镐为辽东经略，筹划四路进兵「捣其巢穴」",
+            "为筹辽东军费，<b>辽饷加派</b>自此年始——尾声里还会再见到它"
+          ],
+          balance:[60,"后金由守转攻，明廷由羁縻转入征剿——攻守之势，自此开始倒转。"],
+          alliance:true, attack:true, routes:false, griev:true, chain:false, steps:false
+        },
+        {
+          kicker:"第五场 · 决战", title:"萨尔浒：五日倾覆四路", years:"1619 · 万历四十七年三月",
+          weight:44, duration:32000, speed:"极慢 · 一分钟一场地看", shot:3, focus:[56,49], terr:3,
+          heroRole:"后金大汗 · 六十一岁 · 以一敌四的统帅",
+          veil:"明军四路十万（含朝鲜军与叶赫助兵，号称四十七万）分进合击，直指赫图阿拉。努尔哈赤的回答只有一句：『凭尔几路来，我只一路去。』——时间在这里放慢，我们一路一路看。",
+          narr:[
+            "万历四十七年（1619）三月，辽东经略杨镐集四路大军会攻赫图阿拉：西路杜松出抚顺，北路马林出开原，东路刘綎出宽甸，南路李如柏出清河，另有朝鲜军万余随东路助战。",
+            "努尔哈赤不分兵堵截，而是集中六万八旗于赫图阿拉与萨尔浒之间，<b>以一路对一路，逐路击破</b>。用右侧的六个步骤，跟着地图把这五天走完——这是第一幕的高潮，时间流速被压到最低。"
+          ],
+          facts:[
+            "<b>明军</b> · 四路实数约八九万，朝鲜军万余、叶赫兵助战，号称四十七万",
+            "<b>后金</b> · 八旗约六万，内线作战，情报与地形尽在其手",
+            "<b>结果</b> · 三路主将杜松、马林（遁走后败亡）、刘綎相继战死，明军损失四五万人",
+            "杨镐下狱（后处死），熊廷弼临危受命经略辽东——守势自此而始"
+          ],
+          balance:[45,"一战易势：明朝在辽东的进攻力量被打断，后金由边患变为国敌。"],
+          alliance:true, attack:false, routes:true, griev:false, chain:false, steps:true
+        },
+        {
+          kicker:"尾声 · 后续影响", title:"八年的连锁反应", years:"1619 — 1627 · 从辽东到北京",
+          weight:7, duration:11000, speed:"重新加速 · 八年掠过", shot:0, focus:[50,45], terr:4,
+          heroRole:"努尔哈赤 · 1626 年宁远城下负伤，是年去世——但他点燃的链条还在走",
+          veil:"萨尔浒的硝烟散了，账却刚刚开始算：辽东的兵、朝廷的钱、皇帝的人，一个接一个被拖进这场战争。镜头重新拉回全景——接下来八年，时间加速。",
+          narr:[
+            "萨尔浒没有直接导致任何一位皇帝的上台——它启动的是一条<b>八年的连锁反应</b>。先是军事：辽东精锐尽丧，明朝在东北由战略进攻永久转为战略防御，两年后沈阳、辽阳相继失守，防线一路退向辽西。",
+            "接着是财政：为补辽东这个无底洞，<b>辽饷</b>从 1618 年起层层加派，成为压在帝国田赋上的第一块石头。然后是朝局：辽事每坏一分，朝中党争就烈一分，经略、督师走马灯般更换，前线与朝廷彼此消耗。",
+            "1620 年万历去世，泰昌一月而崩，天启少年即位；1627 年天启去世，崇祯接过的江山，辽东已空、财政已竭、朝廷已裂。第一幕的炮声停在萨尔浒，第二幕的故事，却要从这个摊子讲起。"
+          ],
+          facts:[
+            "<b>1619</b> · 萨尔浒败后，开原、铁岭失守，叶赫被灭，女真全境归一",
+            "<b>1621</b> · 沈阳、辽阳陷落，辽河以东尽失，辽西走廊成最后屏障",
+            "<b>1618–1627</b> · 辽饷屡次加派，岁增数百万两，财政与民力俱困",
+            "<b>1620 / 1627</b> · 万历崩、泰昌一月、天启七年而终——三帝更迭皆在这条链上"
+          ],
+          balance:[38,"势已成：后金站稳辽东，明朝则要在财政与党争的泥沼里守一条越来越短的防线。"],
+          alliance:true, attack:false, routes:false, griev:false, chain:true, steps:false
+        }
+      ];
+
+      var SARHU_STEPS = [
+        {label:"四路合围", html:"<b>三月初一，四路齐发。</b>红线自沈阳、开原、宽甸、辽阳四个方向同时收紧，目标只有一个：赫图阿拉。分进合击最怕的就是被各个击破——而努尔哈赤等的正是这个。"},
+        {label:"西路覆没", html:"<b>西路杜松</b>进兵最速，抢渡浑河，连破营寨，却在萨尔浒山下被八旗主力迎头截住。杜松战死，西路两万余人覆没——四路中最强的一路，第一天就没了。"},
+        {label:"北路再破", html:"<b>北路马林</b>闻西路败讯，在尚间崖结营自守。八旗乘胜北上，先破其营，再追歼于飞芬山。马林败亡，北路溃散，开原门户洞开。"},
+        {label:"东路伏击", html:"<b>东路刘綎</b>孤军深入，连克营寨直抵深河，却不知西、北两路已亡。后金降卒持杜松令箭诈称接应，刘綎中伏于阿布达里冈，力战而死，朝鲜军随之溃降。"},
+        {label:"南路退兵", html:"<b>南路李如柏</b>行军最缓，闻三路败讯，未遇敌即奉令退兵，途中遭后金哨骑惊扰，自相践踏而还。四路之中，唯此一路全身——也唯此一路，什么都没做。"},
+        {label:"结局", html:"<b>五日，四路破其三。</b>明军损失四五万人、战马万余匹，辽东精锐为之一空。此后明朝在东北再无力组织战略进攻；同年秋，开原、铁岭、叶赫相继落入后金之手——看地图：金色版图已经漫过了辽河以东。"}
+      ];
+
+      var cam = $("#cam"), veil = $("#veil"), playBtn = $("#playBtn");
+      var cur = -1, curShot = 2, curStep = -1, qingApplied = false;
+      var playing = false, rafId = null, lastTs = null, chapElapsed = 0, veilTimer = null;
+
+      /* ----- map element helpers ----- */
+      /* Two renderers share one narrative state:
+         - true 3D: Three.js WebGL scene (terrain with elevation, extruded-feel
+           territory, 3D route tubes, real camera for the five shot scales,
+           limited drag-orbit + wheel zoom)
+         - fallback: the original tilted SVG stage, used only if WebGL or
+           three.js is unavailable. */
+
+      var MODE3D = false;
+      var T3 = null; /* three.js scene registry */
+
+      function W(x){ return (x - 500) / 10; }        /* svg x -> world x */
+      function D(y){ return (y - 350) / 10; }        /* svg y -> world z */
+      function smooth(t){ t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); }
+
+      /* ----- real terrain: SRTM DEM (OpenDEM / Terrain Tiles family) -----
+         Geographic frame: lon 118.6-128.4 E, lat 39.2-44.4 N, mapped linearly
+         onto the stage. assets/dem.png is a 256x184 grayscale grid baked at
+         build time from SRTM elevation tiles (value = elev / 2800 * 255);
+         assets/basemap.jpg is the OpenStreetMap mosaic of the same frame.
+         If the DEM image fails to load, DEM stays null and heightAt falls
+         back to the old procedural relief so the page still works. */
+      var GEO = { lon0: 118.6, lon1: 128.4, lat0: 39.2, lat1: 44.4 };
+      var DEM = null; /* { data:Uint8ClampedArray, w, h } */
+      function loadDEM(done){
+        var img = new Image();
+        img.onload = function(){
+          try {
+            var cv = document.createElement("canvas");
+            cv.width = img.width; cv.height = img.height;
+            var cx = cv.getContext("2d", { willReadFrequently: true });
+            cx.drawImage(img, 0, 0);
+            DEM = { data: cx.getImageData(0, 0, cv.width, cv.height).data, w: cv.width, h: cv.height };
+          } catch(e) { DEM = null; }
+          done();
+        };
+        img.onerror = function(){ DEM = null; done(); };
+        img.src = "assets/dem.png";
+      }
+      function elevAt(lon, lat){
+        if(!DEM) return null;
+        var fx = (lon - GEO.lon0) / (GEO.lon1 - GEO.lon0) * (DEM.w - 1);
+        var fy = (GEO.lat1 - lat) / (GEO.lat1 - GEO.lat0) * (DEM.h - 1);
+        fx = Math.max(0, Math.min(DEM.w - 1.001, fx));
+        fy = Math.max(0, Math.min(DEM.h - 1.001, fy));
+        var x0 = Math.floor(fx), y0 = Math.floor(fy), tx = fx - x0, ty = fy - y0;
+        function px(xx, yy){ return DEM.data[(yy * DEM.w + xx) * 4] / 255 * 2800; }
+        return px(x0, y0) * (1 - tx) * (1 - ty) + px(x0 + 1, y0) * tx * (1 - ty)
+             + px(x0, y0 + 1) * (1 - tx) * ty + px(x0 + 1, y0 + 1) * tx * ty;
+      }
+      function heightMetersAt(x, z){
+        var lon = GEO.lon0 + (x + 52) / 104 * (GEO.lon1 - GEO.lon0);
+        var lat = GEO.lat1 - (z + 37) / 74 * (GEO.lat1 - GEO.lat0);
+        return elevAt(lon, lat);
+      }
+      function elevToH(e){
+        if(e === null || e === undefined) return 0.3;
+        if(e <= 2) return -0.55;                       /* sea / bay floor */
+        return Math.pow(e / 2600, 0.60) * 3.9 + e * 0.00035;
+      }
+      function heightAt(x, z){
+        var e = heightMetersAt(x, z);
+        if(e !== null){
+          var h = elevToH(e);
+          if(e > 2) h += Math.sin(x * 0.85 + z * 0.6) * Math.cos(z * 0.9 - x * 0.3) * 0.035; /* micro relief */
+          return h;
+        }
+        var h = 0.35
+          + Math.sin(x * 0.32) * Math.cos(z * 0.27) * 0.16
+          + Math.sin(x * 0.13 + 1.7) * Math.cos(z * 0.11 + 0.6) * 0.2;
+        var r = smooth((x - 31) / 19);
+        h += r * r * 4.4 * (0.72 + 0.28 * Math.sin(z * 0.45 + 1.2));
+        var rn = smooth((-z - 17) / 15);
+        h += rn * rn * 1.9;
+        var dse = Math.sqrt((x - 43) * (x - 43) + (z - 15) * (z - 15));
+        h += Math.max(0, 2.1 - dse * 0.15);
+        if (x < -30 && z > 12) h = Math.min(h, -0.55);
+        return h;
+      }
+
+      /* ---------- fallback (SVG) helpers ---------- */
+      function svgSetOpacity(sel, v){
+        $$(sel).forEach(function(el){ el.style.transition = "opacity 1.2s ease"; el.style.opacity = v; });
+      }
+      function svgSetTerr(stage){
+        $$(".terr").forEach(function(p){
+          p.style.transition = "opacity 1.6s ease";
+          p.style.opacity = (parseInt(p.getAttribute("data-stage"),10) === stage) ? "0.92" : "0";
+        });
+        $("#jinLabel").style.transition = "opacity 1.2s ease";
+        $("#jinLabel").style.opacity = stage >= 2 ? "0.85" : "0";
+        $("#jinLabel").textContent = stage >= 5 ? "大 清" : "后 金";
+        var cs = $("#capSub");
+        cs.style.transition = "opacity 1.2s ease";
+        cs.style.opacity = stage >= 2 ? "1" : "0";
+        var sm = $("#shengjingMark");
+        sm.style.transition = "opacity 1.2s ease";
+        sm.style.opacity = stage >= 5 ? "1" : "0";
+      }
+      function svgPrepRoutes(){
+        $$(".route, .counter").forEach(function(p){
+          p.style.strokeDasharray = "100";
+          p.style.strokeDashoffset = "100";
+          p.style.transition = "stroke-dashoffset 2.2s ease, opacity .8s ease";
+          p.style.opacity = "1";
+        });
+        $$(".badge").forEach(function(b){ b.style.transition = "opacity .9s ease"; b.style.opacity = "0"; });
+      }
+      function svgDrawPath(sel){
+        var p = document.querySelector(sel); if(!p) return;
+        p.style.strokeDashoffset = "0";
+      }
+      function svgSetBadge(name, v){
+        var b = document.querySelector('[data-badge="'+name+'"]'); if(b) b.style.opacity = v;
+      }
+
+      /* ---------- shared map API (branches on MODE3D) ---------- */
+      function regFade(obj, base){
+        obj.userData.mats = [];
+        obj.traverse(function(o){
+          if(o.material){
+            var ms = Array.isArray(o.material) ? o.material : [o.material];
+            ms.forEach(function(m){
+              m.transparent = true;
+              if(m.userData.baseOp === undefined) m.userData.baseOp = (m.opacity === undefined ? 1 : m.opacity);
+              obj.userData.mats.push(m);
+            });
+          }
+        });
+        obj.userData.opCur = (base === undefined ? 1 : base);
+        obj.userData.opT = obj.userData.opCur;
+        obj.userData.mats.forEach(function(m){ m.opacity = m.userData.baseOp * obj.userData.opCur; });
+        obj.visible = obj.userData.opCur > 0.02;
+        return obj;
+      }
+      function fadeTo(obj, v){ if(obj) obj.userData.opT = v; }
+
+      function setOpacity(sel, v){
+        if(!MODE3D){ svgSetOpacity(sel, v); return; }
+        var map = { "#alliance": T3.alliance, "#attack1618": T3.attack, "#routes1619": T3.routes, "#counter1619": T3.counters };
+        fadeTo(map[sel], v);
+      }
+      function setTerr(stage){
+        if(!MODE3D){ svgSetTerr(stage); return; }
+        T3.terrs.forEach(function(t, i){ fadeTo(t, i === stage ? 0.88 : 0); });
+        fadeTo(T3.jinLabel, stage >= 2 ? 0.9 : 0);
+        var want = stage >= 5 ? "大 清" : "后 金";
+        if(T3.jinText !== want){ T3.jinText = want; drawTextSprite(T3.jinLabel, want, { size: 92, color: "#7c5510", weight: 900, spacing: 26 }); }
+        fadeTo(T3.capSub, stage >= 2 ? 1 : 0);
+        fadeTo(T3.shengjing, stage >= 5 ? 1 : 0);
+      }
+      function prepRoutes(){
+        if(!MODE3D){ svgPrepRoutes(); return; }
+        Object.keys(T3.routeTubes).forEach(function(k){ var t = T3.routeTubes[k]; t.userData.frac = 0; t.userData.fracT = 0; applyTubeFrac(t); if(t.userData.head) t.userData.head.visible = false; });
+        Object.keys(T3.counterTubes).forEach(function(k){ var t = T3.counterTubes[k]; t.userData.frac = 0; t.userData.fracT = 0; applyTubeFrac(t); if(t.userData.head) t.userData.head.visible = false; });
+        Object.keys(T3.badges).forEach(function(k){ fadeTo(T3.badges[k], 0); });
+        var sr = T3.routeTubes.south; if(sr) sr.userData.dimT = 1;
+      }
+      function applyTubeFrac(t){
+        var total = t.geometry.index ? t.geometry.index.count : t.geometry.attributes.position.count;
+        var n = Math.floor(total * Math.max(0, Math.min(1, t.userData.frac)) / 3) * 3;
+        t.geometry.setDrawRange(0, n);
+        if(t.userData.head) t.userData.head.visible = t.userData.frac > 0.96;
+      }
+      function drawPath(sel){
+        if(!MODE3D){ svgDrawPath(sel); return; }
+        var m = /data-counter="(\w+)"/.exec(sel); if(!m) return;
+        var t = T3.counterTubes[m[1]]; if(t) t.userData.fracT = 1;
+      }
+      function routesDrawAll(){
+        if(!MODE3D){ $$(".route").forEach(function(p){ p.style.strokeDashoffset = "0"; }); return; }
+        Object.keys(T3.routeTubes).forEach(function(k){ T3.routeTubes[k].userData.fracT = 1; });
+      }
+      function routeDimSouth(){
+        if(!MODE3D){ var sp = document.querySelector('[data-route="south"]'); if(sp) sp.style.opacity = ".35"; return; }
+        if(T3.routeTubes.south) T3.routeTubes.south.userData.dimT = 0.35;
+      }
+      function badgesOff(){
+        if(!MODE3D){ $$(".badge").forEach(function(b){ b.style.opacity = "0"; }); return; }
+        Object.keys(T3.badges).forEach(function(k){ fadeTo(T3.badges[k], 0); });
+      }
+      function setBadge(name, v){
+        if(!MODE3D){ svgSetBadge(name, v); return; }
+        fadeTo(T3.badges[name], v);
+      }
+      function applyStep(s){
+        if(s === curStep) return; curStep = s;
+        $$("#stepBtns .btn").forEach(function(b,i){ b.setAttribute("aria-pressed", i===s ? "true":"false"); });
+        $("#stepDesc").innerHTML = SARHU_STEPS[s].html;
+        if(s >= 0){ setOpacity("#routes1619", 1); routesDrawAll(); }
+        if(s >= 1){ setOpacity("#counter1619", 1); drawPath('[data-counter="west"]'); setBadge("west", 1); }
+        if(s >= 2){ drawPath('[data-counter="north"]'); setBadge("north", 1); }
+        if(s >= 3){ drawPath('[data-counter="east"]'); setBadge("east", 1); }
+        if(s >= 4){ setBadge("south", 1); routeDimSouth(); }
+        if(s >= 5){ setTerr(4); }
+        else if(cur === 4){ setTerr(3); }
+        var shotsByStep = [3,4,3,3,2,0];
+        setShot(shotsByStep[s], true);
+      }
+
+      /* ---------- camera: five shot scales as real 3D camera moves ---------- */
+      var SHOT3 = [
+        { d: 76, e: 49 }, { d: 52, e: 45 }, { d: 36, e: 41 }, { d: 24, e: 37 }, { d: 15, e: 33 }
+      ];
+      var camGoal = { tx: 0, tz: 0, dist: 76, elev: 49 };
+      var camCur  = { tx: 0, tz: 0, dist: 92, elev: 56 };
+      var userAzim = 0, userElev = 0, userZoom = 1;
+      var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function setShot(i, fromStep){
+        curShot = i;
+        if(MODE3D){
+          var ch = CHAPTERS[Math.max(cur,0)];
+          var fx = (i === 0) ? 50 : ch.focus[0];
+          var fy = (i === 0) ? 45 : ch.focus[1];
+          camGoal.tx = W(fx * 10); camGoal.tz = D(fy * 7);
+          camGoal.dist = SHOT3[i].d; camGoal.elev = SHOT3[i].e;
+        } else {
+          var ch2 = CHAPTERS[Math.max(cur,0)];
+          var fx2 = (i === 0) ? 50 : ch2.focus[0];
+          var fy2 = (i === 0) ? 45 : ch2.focus[1];
+          cam.style.transformOrigin = fx2 + "% " + fy2 + "%";
+          cam.style.transform = "scale(" + SHOTS[i].scale + ")";
+        }
+        $("#shotTag").textContent = SHOTS[i].desc;
+        $$("#shotBtns .btn").forEach(function(b,j){ b.setAttribute("aria-pressed", j===i ? "true":"false"); });
+      }
+
+      /* ---------- three.js scene ---------- */
+      function makeCanvas(w, h){
+        var c = document.createElement("canvas"); c.width = w; c.height = h;
+        return [c, c.getContext("2d")];
+      }
+      function drawTextSprite(sprite, text, opt){
+        opt = opt || {};
+        var size = opt.size || 44, weight = opt.weight || 700, color = opt.color || "#43351a";
+        var spacing = opt.spacing || 0;
+        var pair = makeCanvas(512, 128), ctx = pair[1];
+        ctx.clearRect(0, 0, 512, 128);
+        ctx.font = weight + " " + size + "px 'Noto Serif SC','Songti SC',serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        try { ctx.letterSpacing = spacing + "px"; } catch(e) {}
+        ctx.lineWidth = Math.max(4, size / 7); ctx.strokeStyle = "rgba(243,234,205,.92)";
+        ctx.strokeText(text, 256, 66); ctx.fillStyle = color; ctx.fillText(text, 256, 66);
+        var tex = new THREE.CanvasTexture(pair[0]);
+        tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+        if(sprite.material.map) sprite.material.map.dispose();
+        sprite.material.map = tex; sprite.material.needsUpdate = true;
+        var wWorld = opt.w || Math.max(6, text.length * size * 0.052 + 3);
+        sprite.scale.set(wWorld, wWorld * 0.25, 1);
+      }
+      function textSprite(text, opt){
+        var mat = new THREE.SpriteMaterial({ transparent: true, depthWrite: false });
+        var sp = new THREE.Sprite(mat);
+        drawTextSprite(sp, text, opt);
+        return sp;
+      }
+      function tubeAlong(pts, radius, mat, lift){
+        var v = pts.map(function(p){
+          var x = W(p[0]), z = D(p[1]);
+          return new THREE.Vector3(x, heightAt(x, z) + (lift || 0.45), z);
+        });
+        var curve = new THREE.CatmullRomCurve3(v, false, "catmullrom", 0.15);
+        var geo = new THREE.TubeGeometry(curve, 64, radius, 7, false);
+        var mesh = new THREE.Mesh(geo, mat);
+        mesh.userData.frac = 1; mesh.userData.fracT = 1; mesh.userData.dimT = 1;
+        var end = curve.getPoint(1), tan = curve.getTangent(1);
+        var head = new THREE.Mesh(new THREE.ConeGeometry(radius * 2.5, radius * 6.5, 10), mat);
+        head.position.copy(end).addScaledVector(tan, radius * 2.4);
+        head.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), tan.clone().normalize());
+        mesh.userData.head = head;
+        var grp = new THREE.Group(); grp.add(mesh); grp.add(head);
+        grp.userData.tube = mesh;
+        return grp;
+      }
+
+      var TERRS = [
+        [[566,330],[628,303],[689,330],[699,397],[648,438],[582,417],[556,377]],
+        [[541,296],[612,222],[714,242],[786,323],[745,431],[612,464],[546,411],[520,350]],
+        [[510,256],[633,148],[776,175],[888,283],[847,444],[673,491],[541,444],[480,363]],
+        [[536,323],[571,262],[673,202],[796,242],[888,296],[837,458],[653,485],[541,438],[520,384]],
+        [[485,303],[541,215],[643,141],[776,175],[888,283],[847,444],[673,491],[536,444],[480,370]],
+        [[444,323],[541,215],[643,141],[776,175],[888,283],[847,444],[673,498],[551,518],[439,471],[423,390]]
+      ];
+      var CITIES = [
+        { n: "科尔沁蒙古", x: 371, y: 101, t: "town", big: 1 },
+        { n: "叶赫", x: 588, y: 194, t: "town" },
+        { n: "开原", x: 555, y: 252, t: "town" },
+        { n: "铁岭", x: 523, y: 293, t: "town" },
+        { n: "沈阳", x: 493, y: 350, t: "fort", big: 1 },
+        { n: "辽阳", x: 473, y: 421, t: "fort" },
+        { n: "抚顺", x: 545, y: 339, t: "fort" },
+        { n: "清河城", x: 589, y: 386, t: "town" },
+        { n: "萨尔浒", x: 561, y: 343, t: "battle" },
+        { n: "赫图阿拉", x: 625, y: 361, t: "capital", big: 1 },
+        { n: "宽甸", x: 631, y: 494, t: "town" },
+        { n: "宁远", x: 215, y: 509, t: "town" },
+        { n: "锦州", x: 258, y: 444, t: "fort" }
+      ];
+
+      function init3D(){
+        if(typeof THREE === "undefined") return false;
+        var host = document.getElementById("glHost");
+        if(!host) return false;
+        var renderer;
+        try {
+          renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+        } catch(e) { return false; }
+        if(!renderer || !renderer.getContext()) return false;
+
+        var scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1c1a12);
+        scene.fog = new THREE.Fog(0x2b2417, 185, 340);
+        var camera = new THREE.PerspectiveCamera(42, 1, 0.5, 700);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.18;
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        host.appendChild(renderer.domElement);
+
+        scene.add(new THREE.HemisphereLight(0xfff3d8, 0x44543a, 1.25));
+        var key = new THREE.DirectionalLight(0xffe9c0, 2.35);
+        key.position.set(45, 62, 28);
+        key.castShadow = true;
+        key.shadow.mapSize.set(2048, 2048);
+        key.shadow.camera.left = -62; key.shadow.camera.right = 62;
+        key.shadow.camera.top = 62; key.shadow.camera.bottom = -62;
+        key.shadow.camera.far = 220; key.shadow.bias = -0.0006;
+        scene.add(key);
+        var rim = new THREE.DirectionalLight(0xbfd6c8, 0.55);
+        rim.position.set(-50, 30, -45); scene.add(rim);
+        scene.add(new THREE.AmbientLight(0xffe9c4, 0.38));
+        var bounce = new THREE.DirectionalLight(0xffd9a0, 0.35); bounce.position.set(-20, 18, 55); scene.add(bounce);
+
+        /* far ground disc so no void shows at grazing angles */
+        var disc = new THREE.Mesh(
+          new THREE.CircleGeometry(420, 48),
+          new THREE.MeshStandardMaterial({ color: 0x171208, roughness: 1 })
+        );
+        disc.rotation.x = -Math.PI / 2; disc.position.y = -0.75; scene.add(disc);
+
+        /* terrain with real elevation */
+        var TW = 104, TD = 74, SEGX = 150, SEGZ = 106;
+        var tg = new THREE.PlaneGeometry(TW, TD, SEGX, SEGZ);
+        tg.rotateX(-Math.PI / 2);
+        var pos = tg.attributes.position;
+        var colors = new Float32Array(pos.count * 3);
+        /* Civilization-style readable biomes: plains / grassland / forest floor /
+           hills / rock / snow, flat zones with soft borders, slight per-vertex jitter */
+        var cPlains = new THREE.Color(0xd9c48f), cGrass = new THREE.Color(0x93a75c),
+            cForest = new THREE.Color(0x5d7a42), cHill = new THREE.Color(0xa8905e),
+            cRock = new THREE.Color(0x8d8272), cSnow = new THREE.Color(0xf4efe2),
+            cSand = new THREE.Color(0xe0d0a0), tmpC = new THREE.Color();
+        function n2(x, z){ return Math.sin(x * 0.55 + z * 0.31) * Math.cos(z * 0.47 - x * 0.23) + Math.sin((x + z) * 0.19) * 0.7; }
+        for(var i = 0; i < pos.count; i++){
+          var vx = pos.getX(i), vz = pos.getZ(i), vh = heightAt(vx, vz);
+          pos.setY(i, vh);
+          var moist = n2(vx, vz);
+          tmpC.copy(cPlains);
+          tmpC.lerp(cGrass, smooth((moist + 0.4) * 1.1) * 0.75);            /* grassland patches */
+          if(vx > 4) tmpC.lerp(cForest, smooth((moist + 0.55) * 1.2) * 0.5 * smooth((vh - 0.1) / 1.2)); /* forest floor east */
+          if(vz < -14) tmpC.lerp(cSand, 0.25);                              /* drier north */
+          tmpC.lerp(cHill, smooth((vh - 1.15) / 1.1));                      /* hills */
+          tmpC.lerp(cRock, smooth((vh - 2.5) / 1.2));                       /* rock */
+          tmpC.lerp(cSnow, smooth((vh - 3.9) / 0.7));                       /* snowline */
+          if(vh < -0.15) tmpC.set(0xa8bf9d).lerp(new THREE.Color(0x7fa88f), smooth((-vh) * 1.6)); /* shallows */
+          var jit = 0.965 + ((Math.sin(vx * 12.9898 + vz * 78.233) * 43758.5453) % 1 + 1) % 1 * 0.07;
+          colors[i * 3] = tmpC.r * jit; colors[i * 3 + 1] = tmpC.g * jit; colors[i * 3 + 2] = tmpC.b * jit;
+        }
+        tg.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+        tg.computeVertexNormals();
+        var terrainMat = new THREE.MeshStandardMaterial({ roughness: 0.96, metalness: 0, flatShading: true });
+        var terrain = new THREE.Mesh(tg, terrainMat);
+        terrain.receiveShadow = true;
+        scene.add(terrain);
+        /* drape the real OpenStreetMap mosaic of the same frame over the DEM terrain */
+        new THREE.TextureLoader().load("assets/basemap.jpg", function(tex){
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.anisotropy = 8;
+          terrainMat.map = tex;
+          terrainMat.needsUpdate = true;
+        });
+
+        /* sea: no separate plane — the real coastline comes from the DEM
+           (below-sea-level cells) plus the OSM basemap's own water colour */
+        var sea = null;
+
+        /* rivers */
+        var riverMat = new THREE.MeshStandardMaterial({ color: 0x4e93a8, roughness: 0.2, metalness: 0.05, transparent: true, opacity: 0.96 });
+        var bankMat = new THREE.MeshStandardMaterial({ color: 0xd8c491, roughness: 1, transparent: true, opacity: 0.85 });
+        [
+          [[658,320],[612,330],[545,339],[510,346],[493,350],[459,361],[434,384]],
+          [[566,148],[546,222],[523,283],[485,330],[449,363],[429,417],[398,464],[370,502],[357,532]],
+          [[653,374],[624,369],[592,357],[563,346]],
+          [[985,343],[888,390],[776,451],[673,478],[631,494],[592,565],[584,613]],
+          [[582,411],[528,419],[473,421],[444,438],[431,415]]
+        ].forEach(function(pts){
+          var v = pts.map(function(p){ var x = W(p[0]), z = D(p[1]); return new THREE.Vector3(x, heightAt(x, z) + 0.14, z); });
+          var bank = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(v), 72, 0.62, 6, false), bankMat);
+          scene.add(bank);
+          var m = new THREE.Mesh(
+            new THREE.TubeGeometry(new THREE.CatmullRomCurve3(v), 72, 0.36, 6, false), riverMat);
+          scene.add(m);
+        });
+
+        /* mountains: none added — the ridges are the real DEM itself
+           (Changbai range east, Qianshan hills south-east), textured by OSM */
+
+
+        /* forests: instanced low-poly pines, clustered east & north like Civ woods tiles */
+        (function(){
+          var COUNT = 620, placed = [];
+          var seed = 1619;
+          function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+          var trunkG = new THREE.CylinderGeometry(0.09, 0.13, 0.55, 5);
+          var canG = new THREE.ConeGeometry(0.62, 1.5, 6);
+          var can2G = new THREE.ConeGeometry(0.44, 1.05, 6);
+          var trunkM = new THREE.MeshStandardMaterial({ color: 0x6d4c2f, roughness: 1, flatShading: true });
+          var canM = new THREE.MeshStandardMaterial({ color: 0x3f6128, roughness: 0.95, flatShading: true });
+          var canM2 = new THREE.MeshStandardMaterial({ color: 0x527a33, roughness: 0.95, flatShading: true });
+          var trunks = new THREE.InstancedMesh(trunkG, trunkM, COUNT);
+          var cans = new THREE.InstancedMesh(canG, canM, COUNT);
+          var cans2 = new THREE.InstancedMesh(can2G, canM2, COUNT);
+          trunks.castShadow = cans.castShadow = true;
+          var dummy = new THREE.Object3D(); var n = 0, guard = 0;
+          while(n < COUNT && guard++ < COUNT * 30){
+            var fx = -46 + rnd() * 96, fz = -32 + rnd() * 64;
+            var fh = heightAt(fx, fz);
+            var em = heightMetersAt(fx, fz);
+            if(em !== null){
+              /* real DEM: pines only where Liaodong is actually wooded hills —
+                 roughly 130-1350 m, i.e. the eastern ranges; the Liao plain,
+                 the bays and the high Changbai crest stay open */
+              if(em < 130 || em > 1350) continue;
+              var dens2 = 0.45 + Math.max(0, Math.sin(fx * 0.4 + fz * 0.3)) * 0.4;
+              if(rnd() > dens2) continue;
+            } else {
+              if(fx < -28 && fz > 10) continue;
+              if(fh < 0.15 || fh > 2.9) continue;
+              var belt = 0;
+              if(fx > 10) belt = 0.85;
+              else if(fx > 2 && fz < -4) belt = 0.6;
+              else if(fz < -14) belt = 0.55;
+              else if(fx > 22 && fz > 6) belt = 0.6;
+              else if(fx > -2 && fz > 12 && fx < 14) belt = 0.3;
+              if(belt === 0) continue;
+              var dens = belt * (0.55 + Math.max(0, Math.sin(fx * 0.4 + fz * 0.3)) * 0.45);
+              if(rnd() > dens) continue;
+            }
+            /* clear corridors: 1619 march routes + Hun river line stay tree-free */
+            var corr = [[-0.7,0,6.1,-0.7],[5.5,-9.8,4.3,-3],[13.1,14.4,10.4,3],[-2.7,7.1,7.2,3.9],[11.7,0.5,6.5,-0.6],[5.8,-1.2,4.2,-2.8],[12,1.6,10.2,3.1],[-0.7,0,13.1,-0.7],[4.5,2.5,-14.2,18.9]];
+            var inCorr = false;
+            for(var ri = 0; ri < corr.length; ri++){
+              var a = corr[ri], vx2 = a[2]-a[0], vz2 = a[3]-a[1];
+              var tt = Math.max(0, Math.min(1, ((fx-a[0])*vx2 + (fz-a[1])*vz2) / (vx2*vx2 + vz2*vz2)));
+              var dx2 = fx - (a[0] + vx2*tt), dz2 = fz - (a[1] + vz2*tt);
+              if(dx2*dx2 + dz2*dz2 < 6.5){ inCorr = true; break; }
+            }
+            if(inCorr) continue;
+            var nearCity = false;
+            for(var ci2 = 0; ci2 < CITIES.length; ci2++){ var cx2 = W(CITIES[ci2].x), cz2 = D(CITIES[ci2].y); if((fx-cx2)*(fx-cx2)+(fz-cz2)*(fz-cz2) < 16) { nearCity = true; break; } }
+            if(nearCity) continue;
+            var sc = 0.62 + rnd() * 0.62;
+            dummy.rotation.set(0, rnd() * Math.PI, 0);
+            dummy.position.set(fx, fh + 0.24 * sc, fz); dummy.scale.setScalar(sc); dummy.updateMatrix(); trunks.setMatrixAt(n, dummy.matrix);
+            dummy.position.y = fh + 1.05 * sc; dummy.updateMatrix(); cans.setMatrixAt(n, dummy.matrix);
+            dummy.position.y = fh + 1.72 * sc; dummy.updateMatrix(); cans2.setMatrixAt(n, dummy.matrix);
+            n++;
+          }
+          trunks.count = cans.count = cans2.count = n;
+          scene.add(trunks); scene.add(cans); scene.add(cans2);
+        })();
+
+        /* region labels */
+        function regionLabel(text, sx, sy, opt){
+          var sp = textSprite(text, opt);
+          var x = W(sx), z = D(sy);
+          sp.position.set(x, heightAt(x, z) + (opt.lift || 3.2), z);
+          scene.add(sp); return sp;
+        }
+        regionLabel("大 明", 150, 322, { size: 96, color: "rgba(163,51,39,.78)", weight: 900, spacing: 30, w: 26, lift: 4.5 });
+        regionLabel("辽东都司", 176, 358, { size: 44, color: "rgba(163,51,39,.7)", spacing: 10, w: 13 });
+        regionLabel("辽东湾", 268, 586, { size: 52, color: "#2e5f5a", spacing: 12, w: 13, lift: 2.2 });
+        regionLabel("朝鲜", 852, 548, { size: 52, color: "#7a6a45", spacing: 10, w: 10, lift: 2.6 });
+        regionLabel("长白山", 900, 288, { size: 42, color: "#7a6a45", spacing: 8, w: 11, lift: 6.5 });
+        regionLabel("浑河", 516, 322, { size: 34, color: "#4d7a74", w: 7, lift: 1.8 });
+        regionLabel("辽河", 452, 318, { size: 34, color: "#4d7a74", w: 7, lift: 1.8 });
+        regionLabel("苏子河", 600, 400, { size: 30, color: "#4d7a74", w: 8, lift: 1.8 });
+        regionLabel("鸭绿江", 706, 516, { size: 30, color: "#4d7a74", w: 8, lift: 1.8 });
+        regionLabel("山海关 → 北京", 96, 622, { size: 34, color: "#7a6a45", w: 14, lift: 2.2 });
+
+        /* territories: terrain-conforming gold shapes with a raised rim */
+        var terrs = [];
+        TERRS.forEach(function(poly, si){
+          var shape = new THREE.Shape();
+          poly.forEach(function(p, pi){
+            var x = W(p[0]), z = D(p[1]);
+            if(pi === 0) shape.moveTo(x, -z); else shape.lineTo(x, -z);
+          });
+          shape.closePath();
+          var geo = new THREE.ShapeGeometry(shape, 4);
+          geo.rotateX(-Math.PI / 2);
+          var gp = geo.attributes.position;
+          for(var vi = 0; vi < gp.count; vi++){
+            gp.setY(vi, heightAt(gp.getX(vi), gp.getZ(vi)) + 0.3 + si * 0.05);
+          }
+          geo.computeVertexNormals();
+          var grp = new THREE.Group();
+          var fill = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({
+            color: si === 5 ? 0xb8860b : 0xc9962e, roughness: 0.75, metalness: 0.05,
+            transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false }));
+          fill.renderOrder = 2; grp.add(fill);
+          var rimPts = poly.map(function(p){ var x = W(p[0]), z = D(p[1]); return new THREE.Vector3(x, heightAt(x, z) + 0.42 + si * 0.05, z); });
+          var rimCurve = new THREE.CatmullRomCurve3(rimPts, true, "catmullrom", 0.08);
+          var rimMesh = new THREE.Mesh(
+            new THREE.TubeGeometry(rimCurve, 96, 0.22, 6, true),
+            new THREE.MeshStandardMaterial({ color: 0x8a5f10, roughness: 0.6, transparent: true, opacity: 0 }));
+          rimMesh.renderOrder = 3; grp.add(rimMesh);
+          grp.userData.isTerr = true;
+          scene.add(grp); regFade(grp, 0); terrs.push(grp);
+        });
+
+        /* Jin / Qing label, capital subtitle, Shengjing mark */
+        var jinLabel = textSprite("后 金", { size: 92, color: "#7c5510", weight: 900, spacing: 26 });
+        jinLabel.position.set(W(648), heightAt(W(648), D(296)) + 4.6, D(296));
+        scene.add(jinLabel); regFade(jinLabel, 0);
+        var capSub = textSprite("后金都城 · 1616", { size: 36, color: "#7c651f", w: 13 });
+        capSub.position.set(W(625), heightAt(W(625), D(361)) + 1.1, D(428));
+        scene.add(capSub); regFade(capSub, 0);
+        var shengjing = new THREE.Group();
+        var sjLabel = textSprite("盛京（沈阳）· 大清都城", { size: 40, color: "#6e4d08", weight: 900, w: 19 });
+        sjLabel.position.set(W(473), heightAt(W(493), D(350)) + 5.2, D(350));
+        shengjing.add(sjLabel); scene.add(shengjing); regFade(shengjing, 0);
+
+        /* cities: icon-like Civ settlements — walls, towers, clustered houses, banners */
+        var fortMat = new THREE.MeshStandardMaterial({ color: 0x9a8a72, roughness: 0.95, flatShading: true });
+        var wallMat = new THREE.MeshStandardMaterial({ color: 0x8a7a5f, roughness: 1, flatShading: true });
+        var roofMat = new THREE.MeshStandardMaterial({ color: 0x37424e, roughness: 0.85, flatShading: true });
+        var roofRed = new THREE.MeshStandardMaterial({ color: 0x9c3a2a, roughness: 0.85, flatShading: true });
+        var houseMat = new THREE.MeshStandardMaterial({ color: 0xe6dcc0, roughness: 0.95, flatShading: true });
+        var townMat = new THREE.MeshStandardMaterial({ color: 0x7a4a3a, roughness: 0.9, flatShading: true });
+        var goldMat = new THREE.MeshStandardMaterial({ color: 0xd9a83f, roughness: 0.35, metalness: 0.45, emissive: 0x4a3205, flatShading: true });
+        var battleMat = new THREE.MeshStandardMaterial({ color: 0xa33327, roughness: 0.7, emissive: 0x2a0500, flatShading: true });
+        var capitalRing = null;
+        function addHouse(g, hx, hz, s, roofM){
+          var h = new THREE.Mesh(new THREE.BoxGeometry(0.62 * s, 0.5 * s, 0.52 * s), houseMat);
+          h.position.set(hx, 0.25 * s, hz); h.castShadow = true; g.add(h);
+          var r = new THREE.Mesh(new THREE.ConeGeometry(0.52 * s, 0.34 * s, 4), roofM || roofMat);
+          r.position.set(hx, 0.67 * s, hz); r.rotation.y = Math.PI / 4; r.castShadow = true; g.add(r);
+        }
+        function addTower(g, hx, hz, s, roofM){
+          var tw = new THREE.Mesh(new THREE.BoxGeometry(0.55 * s, 1.15 * s, 0.55 * s), fortMat);
+          tw.position.set(hx, 0.58 * s, hz); tw.castShadow = true; g.add(tw);
+          var r1 = new THREE.Mesh(new THREE.ConeGeometry(0.55 * s, 0.4 * s, 4), roofM || roofMat);
+          r1.position.set(hx, 1.36 * s, hz); r1.rotation.y = Math.PI / 4; r1.castShadow = true; g.add(r1);
+        }
+        function addWall(g, s){
+          var wgeoH = new THREE.BoxGeometry(2.5 * s, 0.55 * s, 0.22 * s);
+          var wgeoV = new THREE.BoxGeometry(0.22 * s, 0.55 * s, 2.5 * s);
+          [[0, -1.14, wgeoH], [0, 1.14, wgeoH]].forEach(function(wd){
+            var w = new THREE.Mesh(wd[2], wallMat); w.position.set(wd[0] * s, 0.28 * s, wd[1] * s); w.castShadow = true; g.add(w);
+          });
+          [[-1.14, 0], [1.14, 0]].forEach(function(wd){
+            var w = new THREE.Mesh(wgeoV, wallMat); w.position.set(wd[0] * s, 0.28 * s, wd[1] * s); w.castShadow = true; g.add(w);
+          });
+          [[-1.14, -1.14], [1.14, -1.14], [-1.14, 1.14], [1.14, 1.14]].forEach(function(cd){ addTower(g, cd[0] * s, cd[1] * s, 0.62 * s); });
+        }
+        function addBanner(g, colorHex, ch, y){
+          var pole = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 1.7, 5), new THREE.MeshStandardMaterial({ color: 0x4a3820, roughness: 1 }));
+          pole.position.y = y; g.add(pole);
+          var pair = makeCanvas(96, 96), ctx = pair[1];
+          ctx.fillStyle = colorHex; ctx.fillRect(4, 6, 88, 84);
+          ctx.lineWidth = 4; ctx.strokeStyle = "#f5ecd2"; ctx.strokeRect(4, 6, 88, 84);
+          ctx.font = "900 56px 'Noto Serif SC',serif"; ctx.fillStyle = "#fff6da";
+          ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(ch, 48, 52);
+          var tex = new THREE.CanvasTexture(pair[0]); tex.colorSpace = THREE.SRGBColorSpace;
+          var flag = new THREE.Mesh(new THREE.PlaneGeometry(0.85, 0.8),
+            new THREE.MeshStandardMaterial({ map: tex, side: THREE.DoubleSide, roughness: 0.9 }));
+          flag.position.set(0.46, y + 0.42, 0); g.add(flag);
+        }
+        CITIES.forEach(function(c){
+          var x = W(c.x), z = D(c.y), base = heightAt(x, z);
+          var g = new THREE.Group(); g.position.set(x, base, z);
+          var plat = new THREE.Mesh(new THREE.CylinderGeometry(c.t === "town" ? 1.15 : 1.85, c.t === "town" ? 1.3 : 2.05, 0.3, 8), wallMat);
+          plat.position.y = 0.12; plat.receiveShadow = true; g.add(plat);
+          if(c.t === "fort"){
+            addWall(g, 1);
+            addTower(g, 0, 0, 1.25, roofRed);
+            addHouse(g, -0.62, 0.55, 0.95); addHouse(g, 0.66, -0.5, 0.85);
+            addBanner(g, "#a33327", "明", 2.6);
+          } else if(c.t === "capital"){
+            addWall(g, 1.3);
+            addTower(g, 0, 0, 1.7, goldMat);
+            var dome = new THREE.Mesh(new THREE.ConeGeometry(0.62, 0.5, 8), goldMat);
+            dome.position.y = 2.85; dome.castShadow = true; g.add(dome);
+            addHouse(g, -0.85, 0.7, 1.0, goldMat); addHouse(g, 0.9, -0.65, 0.95, goldMat); addHouse(g, 0.75, 0.8, 0.8);
+            addBanner(g, "#a5761a", "金", 3.1);
+            var star = textSprite("★", { size: 84, color: "#a5761a", w: 3.4 });
+            star.position.y = 4.1; g.add(star);
+            capitalRing = new THREE.Mesh(
+              new THREE.RingGeometry(2.5, 2.9, 40),
+              new THREE.MeshBasicMaterial({ color: 0xeebd55, transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false }));
+            capitalRing.rotation.x = -Math.PI / 2; capitalRing.position.y = 0.34; g.add(capitalRing);
+          } else if(c.t === "battle"){
+            var bm = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.62, 1.5, 8), battleMat);
+            bm.position.y = 0.75; bm.castShadow = true; g.add(bm);
+            addBanner(g, "#a33327", "战", 2.2);
+            [[-1.3, 0.6], [1.25, 0.75], [0.4, -1.35]].forEach(function(td){
+              var tent = new THREE.Mesh(new THREE.ConeGeometry(0.55, 0.8, 4), houseMat);
+              tent.position.set(td[0], 0.55, td[1]); tent.rotation.y = Math.PI / 4; tent.castShadow = true; g.add(tent);
+            });
+          } else {
+            addHouse(g, -0.4, 0.25, 1.15); addHouse(g, 0.45, -0.3, 0.95); addHouse(g, 0.15, 0.62, 0.8);
+            if(c.big) addTower(g, 0, -0.15, 0.9);
+          }
+          var lab = textSprite(c.n, { size: c.big ? 48 : 41, color: c.t === "capital" ? "#6e4d08" : "#2e2410", weight: c.big ? 900 : 700, w: c.big ? 11.5 : 9 });
+          lab.position.set(0, c.t === "capital" ? 5.6 : 3.9, 0);
+          g.add(lab);
+          scene.add(g);
+        });
+
+        /* armies: Civ-style unit stacks — soldier figures + banner, red Ming / gold Jin */
+        var armies = new THREE.Group();
+        function makeArmy(colorHex, ch, n){
+          var g = new THREE.Group();
+          var bodyM = new THREE.MeshStandardMaterial({ color: colorHex, roughness: 0.7, flatShading: true });
+          var skinM = new THREE.MeshStandardMaterial({ color: 0xe8cf9f, roughness: 0.6, flatShading: true });
+          var offs = [[0, 0], [-0.62, 0.42], [0.62, 0.42], [-0.34, -0.55], [0.36, -0.55], [0, 0.85]];
+          for(var i = 0; i < Math.min(n, offs.length); i++){
+            var s = new THREE.Group(); s.position.set(offs[i][0], 0, offs[i][1]);
+            var bd = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.19, 0.62, 6), bodyM);
+            bd.position.y = 0.31; bd.castShadow = true; s.add(bd);
+            var hd = new THREE.Mesh(new THREE.SphereGeometry(0.15, 8, 7), skinM);
+            hd.position.y = 0.78; s.add(hd);
+            var sp = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1.15, 4), new THREE.MeshStandardMaterial({ color: 0x5a4630, roughness: 1 }));
+            sp.position.set(0.2, 0.62, 0); sp.rotation.z = -0.12; s.add(sp);
+            g.add(s);
+          }
+          var bg = new THREE.Group(); bg.position.set(-0.95, 0, -0.3); addBanner(bg, colorHex, ch, 0.95); bg.scale.setScalar(1.5); g.add(bg);
+          return g;
+        }
+        [
+          ["#a33327", "明", 478, 332, 6], ["#a33327", "明", 543, 232, 5],
+          ["#a33327", "明", 458, 436, 5], ["#a33327", "明", 618, 478, 5],
+          ["#a33327", "明", 538, 326, 4],
+          ["#c9962e", "金", 606, 344, 6], ["#c9962e", "金", 600, 378, 5], ["#c9962e", "金", 578, 352, 6]
+        ].forEach(function(a){
+          var g = makeArmy(a[0], a[1], a[4]);
+          g.scale.setScalar(1.35);
+          var ax = W(a[2]), az = D(a[3]);
+          g.position.set(ax, heightAt(ax, az) + 0.1, az);
+          armies.add(g);
+        });
+        scene.add(armies); regFade(armies, 0);
+
+        /* alliance arc (Hetuala <-> Khorchin) */
+        var alliance = new THREE.Group();
+        (function(){
+          var a = new THREE.Vector3(W(617), heightAt(W(617), D(352)) + 1.4, D(352));
+          var b = new THREE.Vector3(W(371), heightAt(W(371), D(101)) + 1.4, D(101));
+          var mid = new THREE.Vector3(W(500), heightAt(W(500), D(185)) + 5.2, D(185));
+          var curve = new THREE.QuadraticBezierCurve3(a, mid, b);
+          var lineGeo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(48));
+          var line = new THREE.Line(lineGeo, new THREE.LineDashedMaterial({ color: 0xd9a83f, dashSize: 1.7, gapSize: 1.2, transparent: true, opacity: 0.95 }));
+          line.computeLineDistances(); alliance.add(line);
+          var badgePair = makeCanvas(128, 128), bctx = badgePair[1];
+          bctx.beginPath(); bctx.arc(64, 64, 56, 0, Math.PI * 2); bctx.fillStyle = "#a5761a"; bctx.fill();
+          bctx.lineWidth = 5; bctx.strokeStyle = "#fff6da"; bctx.stroke();
+          bctx.font = "900 62px 'Noto Serif SC',serif"; bctx.fillStyle = "#fff6da";
+          bctx.textAlign = "center"; bctx.textBaseline = "middle"; bctx.fillText("盟", 64, 70);
+          var btex = new THREE.CanvasTexture(badgePair[0]); btex.colorSpace = THREE.SRGBColorSpace;
+          var bs = new THREE.Sprite(new THREE.SpriteMaterial({ map: btex, transparent: true, depthWrite: false }));
+          bs.scale.set(3.6, 3.6, 1); bs.position.copy(mid).y += 0.4; alliance.add(bs);
+          var al = textSprite("联姻结盟 · 互为援应", { size: 36, color: "#7c5510", w: 15 });
+          al.position.set(W(400), heightAt(W(400), D(150)) + 3.4, D(150)); alliance.add(al);
+        })();
+        scene.add(alliance); regFade(alliance, 0);
+
+        /* 1618 attacks */
+        var attack = new THREE.Group();
+        var atkMat = new THREE.MeshStandardMaterial({ color: 0xc9962e, roughness: 0.5, emissive: 0x2a1c02 });
+        attack.add(tubeAlong([[617,355],[568,343],[552,340]], 0.3, atkMat, 0.7));
+        attack.add(tubeAlong([[620,368],[600,380],[594,383]], 0.3, atkMat, 0.7));
+        scene.add(attack); regFade(attack, 0);
+
+        /* 1619 routes & counterattacks */
+        var routeMat = new THREE.MeshStandardMaterial({ color: 0xb0402f, roughness: 0.55, emissive: 0x260503 });
+        var counterMat = new THREE.MeshStandardMaterial({ color: 0xd9a83f, roughness: 0.5, emissive: 0x2a1c02 });
+        var routes = new THREE.Group(), counters = new THREE.Group();
+        var routeTubes = {}, counterTubes = {};
+        [
+          ["west",  [[493,350],[520,344],[545,339],[558,342]]],
+          ["north", [[555,252],[548,290],[543,320]]],
+          ["east",  [[631,494],[624,430],[610,395],[604,380]]],
+          ["south", [[473,421],[530,400],[572,389]]]
+        ].forEach(function(r){
+          var g = tubeAlong(r[1], 0.32, routeMat, 0.55); routes.add(g); routeTubes[r[0]] = g.userData.tube;
+        });
+        [
+          ["west",  [[617,355],[595,350],[578,346],[565,344]]],
+          ["north", [[558,338],[550,330],[545,326],[542,322]]],
+          ["east",  [[620,366],[612,372],[606,377],[602,381]]]
+        ].forEach(function(r){
+          var g = tubeAlong(r[1], 0.36, counterMat, 0.65); counters.add(g); counterTubes[r[0]] = g.userData.tube;
+        });
+        scene.add(routes); scene.add(counters);
+        regFade(routes, 0); regFade(counters, 0);
+        Object.keys(routeTubes).forEach(function(k){ routeTubes[k].userData.dimMat = routeMat; });
+        routeMat.transparent = true;
+
+        /* battle result badges */
+        function badgeSprite(mark, text, sx, sy, gray){
+          var pair = makeCanvas(420, 110), ctx = pair[1];
+          ctx.beginPath(); ctx.arc(55, 55, 47, 0, Math.PI * 2);
+          ctx.fillStyle = gray ? "#8f8570" : "#a33327"; ctx.fill();
+          ctx.lineWidth = 4; ctx.strokeStyle = "#ffe9d9"; ctx.stroke();
+          ctx.font = "900 52px 'Noto Serif SC',serif"; ctx.fillStyle = "#ffe9d9";
+          ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(mark, 55, 60);
+          ctx.font = "900 40px 'Noto Serif SC',serif"; ctx.textAlign = "left";
+          ctx.lineWidth = 7; ctx.strokeStyle = "rgba(243,234,205,.9)";
+          ctx.strokeText(text, 118, 58); ctx.fillStyle = gray ? "#6d6350" : "#a33327"; ctx.fillText(text, 118, 58);
+          var tex = new THREE.CanvasTexture(pair[0]); tex.colorSpace = THREE.SRGBColorSpace;
+          var sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
+          sp.scale.set(11.5, 3.0, 1);
+          var x = W(sx), z = D(sy);
+          sp.position.set(x, heightAt(x, z) + 3.4, z);
+          return sp;
+        }
+        var badges = {};
+        [["west", "✕", "杜松战死", 545, 362, 0], ["north", "✕", "马林败亡 · 尚间崖", 548, 304, 0],
+         ["east", "✕", "刘綎战死 · 阿布达里冈", 612, 394, 0], ["south", "退", "李如柏退兵", 580, 404, 1]
+        ].forEach(function(bd){
+          var sp = badgeSprite(bd[1], bd[2], bd[3], bd[4], bd[5]);
+          scene.add(sp); regFade(sp, 0); badges[bd[0]] = sp;
+        });
+
+        T3 = {
+          renderer: renderer, scene: scene, camera: camera, host: host,
+          terrs: terrs, jinLabel: jinLabel, jinText: "后 金", capSub: capSub, shengjing: shengjing,
+          alliance: alliance, attack: attack, routes: routes, counters: counters,
+          routeTubes: routeTubes, counterTubes: counterTubes, badges: badges,
+          capitalRing: capitalRing, routeMat: routeMat, sea: sea, armies: armies,
+          pick: [], lastTs: null
+        };
+        MODE3D = true;
+        document.body.classList.add("gl-on");
+        if(typeof buildPeople3D === "function") buildPeople3D(scene);
+
+        /* drag to orbit (limited), wheel to zoom, click to pick people */
+        var el = renderer.domElement;
+        var drag = null;
+        el.addEventListener("pointerdown", function(e){
+          drag = { x: e.clientX, y: e.clientY, moved: 0 };
+          el.setPointerCapture(e.pointerId);
+        });
+        el.addEventListener("pointermove", function(e){
+          if(!drag) return;
+          var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+          drag.moved += Math.abs(dx) + Math.abs(dy);
+          userAzim = Math.max(-0.75, Math.min(0.75, userAzim + dx * 0.0042));
+          userElev = Math.max(-11, Math.min(13, userElev + dy * 0.09));
+          drag.x = e.clientX; drag.y = e.clientY;
+        });
+        el.addEventListener("pointerup", function(e){
+          var wasClick = drag && drag.moved < 7;
+          drag = null;
+          if(wasClick) pickPerson(e);
+        });
+        el.addEventListener("wheel", function(e){
+          e.preventDefault();
+          userZoom = Math.max(0.55, Math.min(1.7, userZoom * (e.deltaY > 0 ? 1.12 : 0.9)));
+        }, { passive: false });
+
+        function pickPerson(e){
+          var rect = el.getBoundingClientRect();
+          var nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+          var ny = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+          var rc = new THREE.Raycaster();
+          rc.setFromCamera(new THREE.Vector2(nx, ny), camera);
+          var hits = rc.intersectObjects(T3.pick, false);
+          if(hits.length && hits[0].object.userData.pidx !== undefined){
+            selectPerson(hits[0].object.userData.pidx);
+          }
+        }
+
+        function sizeGL(){
+          var w = host.clientWidth || 1, h = host.clientHeight || 1;
+          renderer.setSize(w, h, false);
+          camera.aspect = w / h; camera.updateProjectionMatrix();
+        }
+        sizeGL();
+        window.addEventListener("resize", sizeGL);
+        if(window.ResizeObserver) new ResizeObserver(sizeGL).observe(host);
+
+        var clock = { last: null };
+        function frame(ts){
+          requestAnimationFrame(frame);
+          if(clock.last == null) clock.last = ts;
+          var dt = Math.min(80, ts - clock.last); clock.last = ts;
+          var k = REDUCED ? 1 : 1 - Math.exp(-dt * 0.0026);
+          camCur.tx += (camGoal.tx - camCur.tx) * k;
+          camCur.tz += (camGoal.tz - camCur.tz) * k;
+          camCur.dist += (camGoal.dist * userZoom - camCur.dist) * k;
+          camCur.elev += (camGoal.elev - camCur.elev) * k;
+          var sway = REDUCED ? 0 : Math.sin(ts * 0.00012) * 0.02;
+          var az = -0.52 + userAzim + sway;
+          var elv = (camCur.elev + userElev) * Math.PI / 180;
+          var tx = camCur.tx, tz = camCur.tz;
+          var ty = heightAt(tx, tz) + 1.1;
+          var cd = camCur.dist, ce = Math.cos(elv);
+          camera.position.set(
+            tx + cd * ce * Math.sin(az),
+            ty + cd * Math.sin(elv),
+            tz + cd * ce * Math.cos(az)
+          );
+          camera.lookAt(tx, ty, tz);
+          /* fades */
+          var fk = REDUCED ? 1 : 1 - Math.exp(-dt * 0.0032);
+          [T3.alliance, T3.attack, T3.routes, T3.counters, T3.jinLabel, T3.capSub, T3.shengjing, T3.armies]
+            .concat(T3.terrs, Object.keys(T3.badges).map(function(b){ return T3.badges[b]; }))
+            .forEach(function(o){
+              if(!o || !o.userData.mats) return;
+              o.userData.opCur += (o.userData.opT - o.userData.opCur) * fk;
+              if(Math.abs(o.userData.opT - o.userData.opCur) < 0.004) o.userData.opCur = o.userData.opT;
+              o.visible = o.userData.opCur > 0.02;
+              var oc = o.userData.opCur;
+              o.userData.mats.forEach(function(m){ m.opacity = m.userData.baseOp * oc; });
+            });
+          /* route draw-on */
+          [T3.routeTubes, T3.counterTubes].forEach(function(set){
+            Object.keys(set).forEach(function(kk){
+              var t = set[kk];
+              if(Math.abs(t.userData.fracT - t.userData.frac) > 0.001){
+                t.userData.frac += (t.userData.fracT - t.userData.frac) * (REDUCED ? 1 : 1 - Math.exp(-dt * 0.0016));
+                applyTubeFrac(t);
+              }
+            });
+          });
+          if(T3.routeTubes.south){
+            var dim = T3.routeTubes.south.userData.dimT;
+            T3.routeMat.opacity += ((dim === undefined ? 1 : dim) - T3.routeMat.opacity) * fk;
+          }
+          /* capital pulse + sea shimmer */
+          if(T3.capitalRing && !REDUCED){
+            var s = 1 + Math.sin(ts * 0.0022) * 0.16;
+            T3.capitalRing.scale.set(s, s, 1);
+            T3.capitalRing.material.opacity = 0.42 + Math.sin(ts * 0.0022) * 0.16;
+          }
+          if(T3.sea && !REDUCED) T3.sea.position.y = -0.32 + Math.sin(ts * 0.0009) * 0.05;
+          if(typeof updatePeople3DFrame === "function") updatePeople3DFrame(dt, fk);
+          renderer.render(scene, camera);
+        }
+        requestAnimationFrame(frame);
+        return true;
+      }
+
+      /* WebGL failure surfaces readably instead of a black stage */
+      window.addEventListener("error", function(e){
+        var msg = (e && e.message) || "";
+        if(/THREE|WebGL|webgl/i.test(msg)){
+          var box = document.getElementById("glError");
+          if(box){ box.textContent = "3D 渲染出现问题：" + msg + "（已保留 SVG 沙盘可继续观看）"; box.classList.add("show"); }
+        }
+      });
+
+      /* ----- veil ----- */
+      function showVeil(auto){
+        var ch = CHAPTERS[cur];
+        $("#veilName").textContent = "努尔哈赤";
+        $("#veilRole").textContent = ch.heroRole;
+        $("#veilDesc").textContent = ch.veil;
+        veil.classList.remove("hidden");
+        if(veilTimer) clearTimeout(veilTimer);
+        veilTimer = setTimeout(function(){ veil.classList.add("hidden"); }, auto ? 2100 : 6000);
+      }
+      $("#veilBtn").addEventListener("click", function(){ veil.classList.add("hidden"); if(veilTimer) clearTimeout(veilTimer); });
+      veil.addEventListener("click", function(e){ if(e.target === veil){ veil.classList.add("hidden"); } });
+
+      /* ----- chapter switching ----- */
+      function setChapter(i, opts){
+        opts = opts || {};
+        cur = i; chapElapsed = 0; curStep = -1;
+        var ch = CHAPTERS[i];
+        $("#chKicker").textContent = ch.kicker;
+        $("#chTitle").textContent = ch.title;
+        $("#chYears").textContent = ch.years;
+        $("#heroRole").textContent = ch.heroRole;
+        $("#chNarr").innerHTML = ch.narr.map(function(p){ return '<p class="narr">'+p+'</p>'; }).join("");
+        $("#chFacts").innerHTML = ch.facts.map(function(f){ return "<li>"+f+"</li>"; }).join("");
+        $("#bMing").style.width = ch.balance[0] + "%";
+        $("#bJin").style.width = (100 - ch.balance[0]) + "%";
+        $("#bNote").textContent = ch.balance[1];
+        $("#speedTag").innerHTML = "时间流速 <b>" + ch.speed + "</b>";
+        $("#stepsBox").classList.toggle("show", !!ch.steps);
+        $("#grievBox").classList.toggle("show", !!ch.griev);
+        $("#chainBox").classList.toggle("show", !!ch.chain);
+        /* map state */
+        setTerr(ch.terr);
+        setOpacity("#alliance", ch.alliance ? 1 : 0);
+        if(MODE3D && T3.armies) fadeTo(T3.armies, ch.routes ? 1 : (i >= 3 ? 0.9 : (i >= 1 ? 0.45 : 0)));
+        setOpacity("#attack1618", ch.attack ? 1 : 0);
+        if(ch.routes){ prepRoutes(); setOpacity("#routes1619", 1); setOpacity("#counter1619", 0);
+          setTimeout(function(){ applyStep(0); }, 60);
+        } else {
+          setOpacity("#routes1619", 0); setOpacity("#counter1619", 0);
+          badgesOff();
+        }
+        /* timeline */
+        $$("#tlTrack .tl-seg").forEach(function(seg,j){
+          seg.setAttribute("aria-pressed", j===i ? "true":"false");
+          seg.classList.toggle("done", j < i);
+          var f = seg.querySelector(".fill"); if(f) f.style.width = j < i ? "100%" : "0%";
+        });
+        setShot(ch.shot, true);
+        updatePeople(i);
+        if(!opts.noVeil) showVeil(!!opts.auto);
+      }
+
+      /* ----- timeline build ----- */
+      var track = $("#tlTrack"), yearsRow = $("#tlYears");
+      var shortNames = ["十三副甲","统一女真","建后金","七大恨","萨尔浒","尾声·崇祯即位"];
+      var yearLabels = ["1583","1593","1616","1618","1619","1619→1627"];
+      CHAPTERS.forEach(function(ch, i){
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "tl-seg";
+        b.style.flex = ch.weight + " 1 0";
+        b.setAttribute("aria-pressed","false");
+        b.setAttribute("aria-label", "跳到" + ch.title);
+        b.innerHTML = '<span class="fill"></span><span class="tl-name">' + shortNames[i] + '<span class="tl-yr">' + yearLabels[i] + "</span></span>";
+        b.addEventListener("click", function(){ pause(); setChapter(i); });
+        track.appendChild(b);
+        var y = document.createElement("span");
+        y.style.flex = ch.weight + " 1 0"; y.textContent = yearLabels[i];
+        yearsRow.appendChild(y);
+      });
+
+      /* ----- step buttons ----- */
+      var stepBtns = $("#stepBtns");
+      SARHU_STEPS.forEach(function(s, i){
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "btn"; b.textContent = s.label;
+        b.setAttribute("aria-pressed","false");
+        b.addEventListener("click", function(){ pause(); if(cur !== 4) setChapter(4,{noVeil:true}); veil.classList.add("hidden"); applyStep(i); });
+        stepBtns.appendChild(b);
+      });
+
+      /* ----- playback (non-uniform time) ----- */
+      function tick(ts){
+        if(!playing) return;
+        if(lastTs == null) lastTs = ts;
+        var dt = ts - lastTs; lastTs = ts;
+        chapElapsed += dt;
+        var ch = CHAPTERS[cur];
+        var frac = Math.min(chapElapsed / ch.duration, 1);
+        var seg = $$("#tlTrack .tl-seg")[cur];
+        if(seg){ var f = seg.querySelector(".fill"); if(f) f.style.width = (frac*100) + "%"; }
+        if(ch.steps){
+          var s = Math.min(5, Math.floor(frac * 6));
+          if(s !== curStep) applyStep(s);
+        }
+        if(frac >= 1){
+          if(cur < CHAPTERS.length - 1){ setChapter(cur + 1, {auto:true}); }
+          else { pause(); playBtn.textContent = "↻ 重播第一幕"; return; }
+        }
+        rafId = requestAnimationFrame(tick);
+      }
+      function play(){
+        if(cur === CHAPTERS.length - 1 && chapElapsed >= CHAPTERS[cur].duration - 10){ setChapter(0,{noVeil:true}); }
+        playing = true; lastTs = null;
+        playBtn.textContent = "⏸ 暂停";
+        veil.classList.add("hidden");
+        rafId = requestAnimationFrame(tick);
+      }
+      function pause(){
+        playing = false; lastTs = null;
+        if(rafId) cancelAnimationFrame(rafId);
+        playBtn.textContent = "▶ 播放第一幕";
+      }
+      playBtn.addEventListener("click", function(){ playing ? pause() : play(); });
+      $("#prevBtn").addEventListener("click", function(){ pause(); setChapter(Math.max(0, cur - 1)); });
+      $("#nextBtn").addEventListener("click", function(){ pause(); setChapter(Math.min(CHAPTERS.length - 1, cur + 1)); });
+      $$("#shotBtns .btn").forEach(function(b){
+        b.addEventListener("click", function(){ setShot(parseInt(b.getAttribute("data-shot"),10)); });
+      });
+      document.addEventListener("keydown", function(e){
+        if(e.key === "ArrowRight"){ pause(); setChapter(Math.min(CHAPTERS.length-1, cur+1)); }
+        if(e.key === "ArrowLeft"){ pause(); setChapter(Math.max(0, cur-1)); }
+      });
+
+      /* ----- background people layer (15 figures, no main camera) ----- */
+      var FAC = { jin:"#a5761a", ming:"#a33327", min:"#4f7263" };
+      var PEOPLE = [
+        { name:"努尔哈赤", ini:"努", fac:"jin", role:"主线主人公 · 后金大汗",
+          spots:[[617,351],[610,330],[617,351],[552,330],[553,333],[485,340]],
+          locs:["赫图阿拉","建州境内","赫图阿拉","抚顺城外","萨尔浒","沈阳"],
+          sts:["以十三副甲起兵，攻图伦城，统一建州自此开始。","古勒山破九部联军，女真诸部次第归附。","1616 年称汗建国，国号大金，八旗成军。","发布七大恨，亲率两万八旗攻克抚顺、清河。","在萨尔浒坐镇中军：『凭尔几路来，我只一路去。』","1621 年取辽沈、迁都沈阳；1626 年宁远负伤，是年去世于沈阳。"] },
+        { name:"皇太极", ini:"极", fac:"jin", role:"努尔哈赤第八子 · 四贝勒",
+          spots:[[617,340,0],[617,340,0.45],[617,340],[560,350],[640,340],[505,340]],
+          locs:["赫图阿拉（未出生）","赫图阿拉","赫图阿拉","随军 · 抚顺","赫图阿拉后方","沈阳"],
+          sts:["1592 年才出生，此时尚未登场。","幼子，随父在赫图阿拉长大。","四大贝勒之一，参与建国与八旗军政。","随父出征抚顺，初历战阵。","奉命守赫图阿拉方向，战后参与接收开原、铁岭。","1626 年继位于沈阳——下一代的故事，从他开始。"] },
+        { name:"范文程", ini:"范", fac:"jin", role:"汉臣谋士 · 后金幕府",
+          spots:[[485,340,0],[485,340],[485,340],[552,352],[632,352],[485,330]],
+          locs:["沈阳（未出生）","沈阳","沈阳","抚顺","赫图阿拉","沈阳"],
+          sts:["1597 年才出生，此时尚未登场。","沈阳生员，北宋范文正公之后，读书待仕。","仍在沈阳，辽东已是后金之国——他的仕途不在明廷一边。","抚顺城破时主动求见努尔哈赤，自此入幕府参赞机密。","在赫图阿拉幕府，随军筹划文书与招抚。","随皇太极在沈阳，成为汉臣谋主之首。"] },
+        { name:"万历帝", ini:"万", fac:"ming", role:"明神宗 · 在位四十八年",
+          spots:[[44,408],[44,408],[44,408],[44,408],[44,408],[44,408]],
+          locs:["北京 · 紫禁城","北京 · 紫禁城","北京 · 紫禁城","北京 · 紫禁城","北京 · 紫禁城","北京 · 紫禁城"],
+          sts:["在位前期尚称勤政，国库充盈，边事有张居正余荫。","怠政渐深，矿税使四出，朝廷与地方俱怨。","深居西苑不见群臣；赫图阿拉称汗的消息，还惊动不了他。","七大恨檄文传来，始下诏征剿，辽饷加派自此始。","萨尔浒败讯入京，震怒而无可奈何，杨镐下狱。","1620 年去世。临终仍在为辽东的军费与败局收尾。"] },
+        { name:"魏忠贤", ini:"魏", fac:"ming", role:"司礼监秉笔太监 · 后来的「九千岁」",
+          spots:[[80,436,0.45],[80,436],[80,436],[80,436],[80,436],[80,436]],
+          locs:["河间肃宁（未入宫）","北京 · 东宫","北京 · 宫中","北京 · 宫中","北京 · 宫中","北京 · 宫中"],
+          sts:["还是河间肃宁的市井无赖，1589 年才净身入宫。","入宫多年，在东宫侍奉皇长孙，渐得宠信。","结交客氏，地位日升，司礼监秉笔在望。","宫中根基渐固，只等老皇帝咽气、新君年幼。","萨尔浒的败讯与他无关——他的战场在紫禁城里。","天启朝权倾天下，自称九千岁；1627 年崇祯即位，数月后自缢。"] },
+        { name:"崇祯", ini:"崇", fac:"ming", role:"信王 · 后来的崇祯帝",
+          spots:[[44,470,0],[44,470,0],[44,470,0],[44,470,0.45],[44,470,0.45],[44,470]],
+          locs:["北京（未出生）","北京（未出生）","北京（未出生）","北京（未出生）","北京 · 信王府","北京 · 紫禁城"],
+          sts:["1611 年才出生，此时尚未登场。","尚未出生——他出生那年，后金建国只剩五年。","尚未出生。","尚未出生。","八岁的信王，在王府里读书，与辽东的炮声隔着整个帝国。","1627 年即位：勤政、削魏忠贤——接手的却是空了的辽东与见底的国库。"] },
+        { name:"多尔衮", ini:"衮", fac:"jin", role:"努尔哈赤第十四子 · 日后的睿亲王",
+          spots:[[600,370,0],[600,370,0],[600,370,0.45],[600,370,0.45],[600,370,0.45],[478,362]],
+          locs:["赫图阿拉（未出生）","赫图阿拉（未出生）","赫图阿拉 · 幼子","赫图阿拉 · 幼子","赫图阿拉 · 幼子","沈阳"],
+          sts:["1612 年才出生，此时尚未登场。","尚未出生。","四岁的幼子，在赫图阿拉的汗宫里长大。","六岁，随兄长们在汗宫中，还轮不到他上马打仗。","七岁幼子——萨尔浒的胜负，将决定他一生的起点。","随皇太极在沈阳，由皇子向贝勒成长——他将是最后一幕的关键人物。"] },
+        { name:"熊廷弼", ini:"熊", fac:"ming", role:"辽东经略 · 以严峻著称",
+          spots:[[360,652,0.45],[104,386],[104,386],[104,386],[465,410],[104,386]],
+          locs:["湖广江夏 · 求学","北京","北京","北京","辽阳","北京 · 狱中"],
+          sts:["湖广江夏青年，尚未中进士，已以刚介闻名乡里。","1598 年进士入仕；1608 年巡按辽东，查军实、斩逃将，军中畏之。","在朝屡疏直言辽事，与同僚不合，锋芒太露。","辽事日坏，他在京中冷眼旁观杨镐的四路部署。","萨尔浒败后临危受命，代杨镐经略辽东，提出『三方布置』。","广宁之败后下狱，1625 年被杀，传首九边——辽东又折一柱。"] },
+        { name:"袁崇焕", ini:"袁", fac:"ming", role:"宁远守将 · 第二幕的主人公",
+          spots:[[206,652,0.45],[206,652,0.45],[206,652],[206,652],[206,652],[222,496]],
+          locs:["广东东莞 · 求学","广东东莞 · 科场","福建邵武方向（未赴任）","福建邵武方向（未赴任）","福建邵武 · 知县任上","宁远"],
+          sts:["广东东莞少年，在岭南读书，与辽东相隔万里。","屡试科场，骑射诗文之外，最爱谈兵。","尚未登科；他日后守的那座城，此时还只是地图上的一个点。","尚未登科。","1619 年进士及第，其后授福建邵武知县——辽东大败那年，他刚走上仕途。","1622 年单骑出关察辽事，筑宁远、守宁远，1626 年以炮退皇太极。"] },
+        { name:"毛文龙", ini:"毛", fac:"ming", role:"东江总兵 · 皮岛开镇",
+          spots:[[560,652,0.45],[470,330],[470,330],[470,330],[470,330],[594,612]],
+          locs:["浙江杭州 · 少年","辽东军中","辽东军中","辽东军中","辽东军中","皮岛"],
+          sts:["杭州少年，尚未从军——他与辽东的缘分，要到十多年后才开始。","在辽东都司效力，熟悉边地与海路。","仍在辽东军中，等待属于自己的机会。","随军备战，名位不高。","萨尔浒战后随军收拾残局，两年后将有一次奇袭。","1621 年奇袭镇江，后退据皮岛开镇东江——钉在后金背后的一颗钉子。"] },
+        { name:"顺治", ini:"顺", fac:"jin", role:"皇太极第九子 · 日后的顺治帝",
+          spots:[[505,330,0],[505,330,0],[505,330,0],[505,330,0],[505,330,0],[505,330,0]],
+          locs:["沈阳（未出生）","沈阳（未出生）","沈阳（未出生）","沈阳（未出生）","沈阳（未出生）","沈阳（未出生）"],
+          sts:["1638 年才出生，尚不在第一幕的时间里。","1638 年才出生，尚不在第一幕的时间里。","1638 年才出生，尚不在第一幕的时间里。","1638 年才出生，尚不在第一幕的时间里。","1638 年才出生，尚不在第一幕的时间里。","1638 年才出生——那是第一幕落幕十一年之后、清军入关前夜的事了。"] },
+        { name:"洪承畴", ini:"洪", fac:"ming", role:"陕西督粮参政 · 日后的松山统帅",
+          spots:[[428,652,0],[428,652,0.45],[428,652],[64,232],[64,232],[64,232]],
+          locs:["福建泉州（幼童）","福建泉州 · 求学","福建泉州 · 进士及第","陕西","陕西","陕西"],
+          sts:["1593 年生于福建泉州，尚是幼童。","泉州求学，以经世之才自许。","1616 年进士及第——同年，努尔哈赤在赫图阿拉称汗。","外放陕西任职，开始接触西北的粮饷与边事。","在陕西督粮，农民军的火种正在他眼皮底下积聚。","任陕西督粮参政，其后将以三边总督身份镇压农民军十余年。"] },
+        { name:"吴三桂", ini:"吴", fac:"ming", role:"辽西将门之后 · 宁远年轻将领",
+          spots:[[240,470,0],[240,470,0],[240,470,0],[240,470,0.45],[240,470,0.45],[232,492]],
+          locs:["辽西（未出生）","辽西（未出生）","辽西（未出生）","辽西（未出生）","辽西 · 将门幼子","宁远"],
+          sts:["1612 年才出生，此时尚未登场。","尚未出生。","尚未出生。","尚未出生。","辽东总兵吴襄之子，七岁幼童，在将门中长大。","宁远年轻将领，随父守辽西——他守的那道关，日后将由他亲手打开。"] },
+        { name:"李自成", ini:"李", fac:"min", role:"米脂驿卒 · 日后的闯王",
+          spots:[[26,296,0],[26,296,0],[26,296,0.45],[26,296],[26,296],[26,296]],
+          locs:["陕西米脂（未出生）","陕西米脂","陕西米脂","陕西米脂","陕西米脂","陕西米脂"],
+          sts:["1606 年才出生，此时尚未登场。","米脂孩童，家贫，为人牧羊。","少年驿卒，往来于陕北的黄土沟壑之间。","仍在驿站当差——驿站，是明朝财政最先砍到的地方。","萨尔浒的炮声传不到米脂；但辽饷的摊派，传得到。","驿卒将裁、饥荒将至。1630 年，他将投奔起义军——火种已下。"] },
+        { name:"张献忠", ini:"张", fac:"min", role:"延安边军 · 日后的大西王",
+          spots:[[64,352,0],[64,352,0],[64,352,0.45],[64,352],[64,352],[64,352]],
+          locs:["陕西延安（未出生）","陕西延安","陕西延安","陕西延安","陕西延安","陕西延安"],
+          sts:["1606 年才出生，此时尚未登场。","延安孩童，家贫读过书。","投身延安边军当兵，吃粮打仗。","仍在边军中，陕北连年大旱的影子已经压下来。","边军欠饷日甚——他效忠的这个朝廷，正在欠他的军饷。","尚在延安当兵；1630 年聚众起事，是为日后的大西政权之始。"] }
+      ];
+      var peopleLayer = document.getElementById("peopleLayer");
+      var SVGNS = "http://www.w3.org/2000/svg";
+      var selPerson = -1;
+      PEOPLE.forEach(function(p, idx){
+        var g = document.createElementNS(SVGNS, "g");
+        g.setAttribute("class", "person");
+        g.style.transition = "transform 1.3s cubic-bezier(.6,0,.2,1), opacity 1s ease";
+        var c = document.createElementNS(SVGNS, "circle");
+        c.setAttribute("r", "11"); c.setAttribute("fill", FAC[p.fac]);
+        c.setAttribute("stroke", "#fff6da"); c.setAttribute("stroke-width", "1.6");
+        var t = document.createElementNS(SVGNS, "text");
+        t.setAttribute("text-anchor", "middle"); t.setAttribute("y", "4.5");
+        t.setAttribute("font-size", "11.5"); t.setAttribute("fill", "#fff8e6");
+        t.setAttribute("font-family", "Noto Serif SC,serif"); t.setAttribute("font-weight", "900");
+        t.textContent = p.ini;
+        var n = document.createElementNS(SVGNS, "text");
+        n.setAttribute("x", "14"); n.setAttribute("y", "4.5");
+        n.setAttribute("font-size", "12"); n.setAttribute("fill", "#43351a");
+        n.setAttribute("font-family", "Noto Serif SC,serif"); n.setAttribute("font-weight", "700");
+        n.setAttribute("style", "paint-order:stroke;stroke:#efe3c2;stroke-width:3px");
+        n.textContent = p.name;
+        g.appendChild(c); g.appendChild(t); g.appendChild(n);
+        g.addEventListener("click", function(e){ e.stopPropagation(); selectPerson(idx); });
+        peopleLayer.appendChild(g);
+        p.el = g;
+      });
+
+      /* ----- 3D people: standing figures on the terrain (built by init3D) ----- */
+      var peopleGroup3 = null;
+      function buildPeople3D(scene){
+        peopleGroup3 = new THREE.Group();
+        PEOPLE.forEach(function(p, idx){
+          var g = new THREE.Group();
+          var col = new THREE.Color(FAC[p.fac]);
+          var body = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.34, 0.52, 1.7, 10),
+            new THREE.MeshStandardMaterial({ color: col, roughness: 0.65, transparent: true }));
+          body.position.y = 0.85; body.castShadow = true; g.add(body);
+          var head = new THREE.Mesh(
+            new THREE.SphereGeometry(0.42, 14, 12),
+            new THREE.MeshStandardMaterial({ color: 0xe8cf9f, roughness: 0.6, transparent: true }));
+          head.position.y = 2.05; head.castShadow = true; g.add(head);
+          /* name board: coloured disc with the surname character + name */
+          var pair = makeCanvas(320, 96), ctx = pair[1];
+          ctx.beginPath(); ctx.arc(48, 48, 40, 0, Math.PI * 2);
+          ctx.fillStyle = FAC[p.fac]; ctx.fill();
+          ctx.lineWidth = 4; ctx.strokeStyle = "#fff6da"; ctx.stroke();
+          ctx.font = "900 44px 'Noto Serif SC',serif"; ctx.fillStyle = "#fff8e6";
+          ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(p.ini, 48, 52);
+          ctx.font = "700 36px 'Noto Serif SC',serif"; ctx.textAlign = "left";
+          ctx.lineWidth = 7; ctx.strokeStyle = "rgba(20,14,4,.88)";
+          ctx.strokeText(p.name, 100, 52); ctx.fillStyle = "#f5ecd2"; ctx.fillText(p.name, 100, 52);
+          var tex = new THREE.CanvasTexture(pair[0]); tex.colorSpace = THREE.SRGBColorSpace;
+          var board = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
+          board.scale.set(10.5, 3.15, 1); board.position.y = 3.6; g.add(board);
+          var hit = new THREE.Mesh(
+            new THREE.SphereGeometry(2.3, 8, 6),
+            new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false }));
+          hit.position.y = 1.6; hit.userData.pidx = idx; g.add(hit);
+          T3.pick.push(hit);
+          g.userData.mats = [body.material, head.material, board.material];
+          g.userData.opCur = 0; g.userData.opT = 0;
+          g.visible = false;
+          var s = p.spots[Math.max(cur, 0)];
+          var wx = W(s[0]), wz = D(s[1]);
+          g.position.set(wx, heightAt(wx, wz), wz);
+          g.userData.gx = wx; g.userData.gz = wz;
+          peopleGroup3.add(g);
+          p.g3 = g; p.hit = hit;
+        });
+        scene.add(peopleGroup3);
+      }
+      function updatePeople3DFrame(dt, fk){
+        if(!peopleGroup3) return;
+        PEOPLE.forEach(function(p){
+          if(!p.g3) return;
+          var g = p.g3;
+          g.position.x += (g.userData.gx - g.position.x) * fk;
+          g.position.z += (g.userData.gz - g.position.z) * fk;
+          g.position.y = heightAt(g.position.x, g.position.z);
+          g.userData.opCur += (g.userData.opT - g.userData.opCur) * fk;
+          if(Math.abs(g.userData.opT - g.userData.opCur) < 0.01) g.userData.opCur = g.userData.opT;
+          g.visible = g.userData.opCur > 0.03 && peopleOn;
+          g.userData.mats.forEach(function(m){ m.opacity = g.userData.opCur; });
+          if(p.hit) p.hit.visible = g.visible;
+        });
+      }
+
+      function updatePeople(ci){
+        if(MODE3D && peopleGroup3){
+          PEOPLE.forEach(function(p){
+            var s = p.spots[ci];
+            if(!p.g3) return;
+            p.g3.userData.gx = W(s[0]); p.g3.userData.gz = D(s[1]);
+            p.g3.userData.opT = (s[2] === 0) ? 0 : (s[2] ? s[2] : 0.97);
+          });
+        } else {
+          PEOPLE.forEach(function(p){
+            var s = p.spots[ci];
+            p.el.style.transform = "translate(" + s[0] + "px," + s[1] + "px)";
+            if(s[2] === 0){ p.el.style.opacity = "0"; p.el.style.pointerEvents = "none"; }
+            else { p.el.style.opacity = s[2] ? String(s[2]) : "0.96"; p.el.style.pointerEvents = "auto"; }
+          });
+        }
+        if(selPerson >= 0) fillCard(selPerson, ci);
+      }
+      function fillCard(idx, ci){
+        var p = PEOPLE[idx];
+        $("#pcName").textContent = p.name;
+        $("#pcRole").textContent = p.role;
+        $("#pcStatus").textContent = p.sts[ci];
+        $("#pcLoc").textContent = "此时位置 · " + p.locs[ci] + "（支线人物，不占主镜头）";
+      }
+      function selectPerson(idx){
+        selPerson = idx;
+        fillCard(idx, Math.max(cur, 0));
+        $("#pcard").classList.add("show");
+      }
+      $("#pcardClose").addEventListener("click", function(){ selPerson = -1; $("#pcard").classList.remove("show"); });
+      var peopleOn = true;
+      $("#peopleToggle").addEventListener("click", function(){
+        peopleOn = !peopleOn;
+        peopleLayer.style.transition = "opacity .6s ease";
+        peopleLayer.style.opacity = peopleOn ? "1" : "0";
+        peopleLayer.style.pointerEvents = peopleOn ? "auto" : "none";
+        if(peopleGroup3) peopleGroup3.visible = peopleOn;
+        this.setAttribute("aria-pressed", peopleOn ? "true" : "false");
+        this.textContent = peopleOn ? "支线人物层 · 开" : "支线人物层 · 关";
+        if(!peopleOn){ selPerson = -1; $("#pcard").classList.remove("show"); }
+      });
+
+      /* ----- init: load the real DEM first, then build the scene on it ----- */
+      loadDEM(function(){
+        init3D();
+        prepRoutes();
+        setChapter(0);
+      });
+    })();
+    </script>
+  </body>
+</html>
